@@ -9,19 +9,10 @@ namespace ZealandZooCase.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        private ZealandDBContext ZealandDBContext;
-        public IndexModel(ILogger<IndexModel> logger, ZealandDBContext context)
+        public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
-            ZealandDBContext = context;
-        }
 
-        public List<AllOurEvent> ViewAllOurEvents { get; set; }
-
-        public void OnGet()
-        {
-
-            ViewAllOurEvents = ZealandDBContext.AllOurEvents.ToList();
         }
 
 
@@ -29,5 +20,29 @@ namespace ZealandZooCase.Pages
         {
             return RedirectToPage("/EventDetails");
         }
+
+
+        public IActionResult OnGet()
+        {
+
+            var username = HttpContext.Session.GetString("Username");
+
+            if (!string.IsNullOrEmpty(username))
+            {
+                // Already logged in — redirect to home
+                return RedirectToPage("/HomePage");
+            }
+
+            // Otherwise show login or guest option
+            return Page();
+        }
+
+        public IActionResult OnPostContinueAsGuest()
+        {
+            // Just skip login — do not set session
+            return RedirectToPage("/HomePage");
+        }
+
+
     }
 }

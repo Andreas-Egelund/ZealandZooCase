@@ -1,0 +1,64 @@
+﻿@page
+@model ZealandZooCase.Pages.HomePageModel
+@{
+}
+
+
+@if(Model.IsLoggedIn)
+{
+    <h2>Welcome back, @Model.CurrentUser.UserName!</h2>
+}
+else
+{
+    <h2>Welcome to Zealand Zoo Guest!</h2>
+}
+
+
+
+<h2 class="mb-4">Upcoming Events</h2>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+    @for (int i = 0; i < Model.AllEvents.Count; i++)
+    {
+        var ev = Model.AllEvents[i];
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                @if (!string.IsNullOrEmpty(ev.EventImageName))
+                {
+                    <img src="/Images/@ev.EventImageName" class="card-img-top" alt="@ev.EventName" style="height: 200px; object-fit: cover;">
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@ev.EventName</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@ev.EventDate.ToString("dd MMMM, yyyy")</h6>
+                    <p class="card-text">@ev.EventDescription.Substring(0, Math.Min(ev.EventDescription.Length, 60))...</p> 
+                </div>
+                <div class="card-footer bg-white">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#eventModal@(i)">View Details</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for this event -->
+        <div class="modal fade" id="eventModal@(i)" tabindex="-1" aria-labelledby="eventModalLabel@(i)" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="eventModalLabel@i">@ev.EventName</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @if (!string.IsNullOrEmpty(ev.EventImageName))
+                        {
+                            <img src="/Images/@ev.EventImageName" alt="@ev.EventName" class="img-fluid mb-3 rounded" />
+                        }
+                        <p><strong>Date:</strong> @ev.EventDate.ToString("dd MMMM, yyyy")</p>
+                        <p>@ev.EventDescription</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

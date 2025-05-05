@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\AdminFolder\**" />
+    <Compile Remove="Pages\UserFolder\**" />
+    <Content Remove="Pages\AdminFolder\**" />
+    <Content Remove="Pages\UserFolder\**" />
+    <EmbeddedResource Remove="Pages\AdminFolder\**" />
+    <EmbeddedResource Remove="Pages\UserFolder\**" />
+    <None Remove="Pages\AdminFolder\**" />
+    <None Remove="Pages\UserFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.4">
@@ -17,8 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\AdminFolder\" />
-    <Folder Include="Pages\UserFolder\" />
+    <None Include="wwwroot\Images\music_fest.jpg" />
   </ItemGroup>
 
 </Project>

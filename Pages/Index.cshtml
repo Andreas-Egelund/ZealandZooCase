@@ -10,3 +10,22 @@
 </div>
 
 
+
+
+<h2>Welcome</h2>
+<p>Would you like to log in or continue as a guest?</p>
+
+<div>
+    <form method="get" asp-page="/AccountPages/LoginPage">
+        <button type="submit">Login</button>
+    </form>
+    <form method="get" asp-page="/AccountPages/Register">
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+<form method="post">
+    <button type="submit" asp-page-handler="ContinueAsGuest">Continue as Guest</button>
+</form>
+
+

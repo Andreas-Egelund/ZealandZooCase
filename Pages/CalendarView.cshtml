@@ -1,0 +1,117 @@
+﻿@page
+@model ZealandZooCase.Pages.CalendarViewModel
+@{
+}
+@using System.Globalization
+@{
+    var month = Model.CurrentMonth;
+    var daysInMonth = DateTime.DaysInMonth(month.Year, month.Month);
+    var firstDayOfMonth = new DateTime(month.Year, month.Month, 1);
+
+    // Adjust so week starts on Monday
+    var firstDayOfWeek = ((int)firstDayOfMonth.DayOfWeek + 6) % 7; // 0 = Monday, 6 = Sunday
+
+    var weeks = new List<List<DateTime>>();
+    var currentDay = firstDayOfMonth.AddDays(-firstDayOfWeek); // Start on the Monday before or on the 1st
+    var today = DateTime.Today;
+
+    while (currentDay.Month < month.Month || currentDay <= firstDayOfMonth.AddMonths(1).AddDays(-1) || currentDay.DayOfWeek != DayOfWeek.Monday)
+    {
+        var week = new List<DateTime>();
+        for (int i = 0; i < 7; i++)
+        {
+            week.Add(currentDay);
+            currentDay = currentDay.AddDays(1);
+        }
+        weeks.Add(week);
+    }
+
+    var prevMonth = month.AddMonths(-1).ToString("yyyy-MM");
+    var nextMonth = month.AddMonths(1).ToString("yyyy-MM");
+}
+
+<h2 class="text-center my-4">@month.ToString("MMMM yyyy")</h2>
+
+<div class="text-center mb-4">
+    <a class="btn btn-outline-primary me-2" asp-page="/CalendarView" asp-route-month="@prevMonth">← Previous</a>
+    <a class="btn btn-outline-primary" asp-page="/CalendarView" asp-route-month="@nextMonth">Next →</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered text-center align-middle">
+        <thead class="table-light">
+            <tr>
+                @{
+                    // Shift abbreviated day names so Monday is first
+                    var dayNames = CultureInfo.CurrentCulture.DateTimeFormat.AbbreviatedDayNames;
+                    var reorderedDayNames = dayNames.Skip(1).Concat(dayNames.Take(1));
+                }
+                @foreach (var dayName in reorderedDayNames)
+                {
+                    <th>@dayName</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var week in weeks)
+            {
+                <tr>
+                    @foreach (var day in week)
+                    {
+                        var isCurrentMonth = day.Month == month.Month;
+                        var isToday = day == today;
+                        var eventsToday = Model.GetEventsForDate(day);
+
+                        var cellClasses = "p-2";
+                        if (!isCurrentMonth) cellClasses += " text-muted bg-light";
+                        if (isToday) cellClasses += " border border-primary border-2";
+
+                        <td class="@cellClasses" style="min-height: 100px;">
+                            <div class="fw-bold mb-2 @(isToday ? "text-primary" : "")">@day.Day</div>
+
+                            @if (eventsToday.Any())
+                            {
+                                @foreach (var ev in eventsToday)
+                                {
+                                    var modalId = "eventModal" + ev.EventId; // Use EventId to make the modal unique
+
+                                    <div>
+                                        <!-- Event Button to trigger Modal -->
+                                        <button type="button" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#@modalId">
+                                            <div class="badge bg-primary d-block text-wrap mb-1" title="@ev.EventDescription">
+                                                @ev.EventName
+                                            </div>
+                                        </button>
+
+                                        <!-- Modal for this event -->
+                                        <div class="modal fade" id="@modalId" tabindex="-1" aria-labelledby="eventModalLabel@modalId" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="eventModalLabel@modalId">@ev.EventName</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        @if (!string.IsNullOrEmpty(ev.EventImageName))
+                                                        {
+                                                            <img src="/Images/@ev.EventImageName" alt="@ev.EventName" class="img-fluid mb-3 rounded" />
+                                                        }
+                                                        <p><strong>Date:</strong> @ev.EventDate.ToString("dd MMMM, yyyy")</p>
+                                                        <p>@ev.EventDescription</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
