@@ -15,7 +15,8 @@ namespace ZealandZooCase.Pages.AccountPages
         }
 
         [BindProperty]
-        public string Username { get; set; }
+        public string UsernameOrEmail { get; set; }
+
 
         [BindProperty]
         public string Password { get; set; }
@@ -28,7 +29,7 @@ namespace ZealandZooCase.Pages.AccountPages
 
         public IActionResult OnPost()
         {
-            var user = _context.Users.SingleOrDefault(u => u.UserName == Username && u.UserPassword == Password);
+            var user = _context.Users.SingleOrDefault(u => u.UserName == UsernameOrEmail && u.UserPassword == Password|| u.UserEmail == UsernameOrEmail && u.UserPassword == Password);
 
 
 
@@ -38,7 +39,7 @@ namespace ZealandZooCase.Pages.AccountPages
                 return Page();
             }
 
-            HttpContext.Session.SetString("Username", Username);
+            HttpContext.Session.SetString("Username", user.UserName);
             return RedirectToPage("/HomePage");
         }
     }

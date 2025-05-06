@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Net.Mail;
 using System.Net;
+using Microsoft.EntityFrameworkCore;
 using ZealandZooCase.Data;
 using ZealandZooCase.Models;
 using ZealandZooCase.Services;
@@ -22,10 +23,13 @@ namespace ZealandZooCase.Pages
             _context = context;
         }
 
+        public OpenHour? OpenHour { get; set; }
         public User ?CurrentUser { get; set; }
 
         public bool IsLoggedIn { get; set; }
 
+
+        public List<OpenHour> OpenHours { get; set; }
 
         public List<AllOurEvent> AllEvents { get; set; }
 
@@ -36,6 +40,8 @@ namespace ZealandZooCase.Pages
 
         public void OnGet()
         {
+            OpenHour = _context.OpenHours.FirstOrDefault();
+
             AllEvents = _context.AllOurEvents.ToList();
 
             CurrentUser = _zealandService.SetCurrentUser();
