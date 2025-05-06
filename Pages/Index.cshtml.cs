@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZealandZooCase.Data;
 using ZealandZooCase.Models;
+using ZealandZooCase.Services;
 
 namespace ZealandZooCase.Pages
 {
@@ -9,12 +10,14 @@ namespace ZealandZooCase.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
+
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
 
         }
 
+        public User CurrentUser { get; set; }
 
         public IActionResult OnPostVisKalander()
         {
@@ -24,6 +27,7 @@ namespace ZealandZooCase.Pages
 
         public IActionResult OnGet()
         {
+
 
             var username = HttpContext.Session.GetString("Username");
 

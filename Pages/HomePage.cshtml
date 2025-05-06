@@ -18,7 +18,7 @@ else
 <h2 class="mb-4">Upcoming Events</h2>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-    @for (int i = 0; i < Model.AllEvents.Count; i++)
+    @for (int i = 0; i < Model.AllEvents.Count; i++) //Bruger for-loop i stedet for foreach, da vi skal kunne tracke hvilken modal der skal åbne til hvert event
     {
         var ev = Model.AllEvents[i];
         <div class="col">
@@ -53,6 +53,9 @@ else
                         }
                         <p><strong>Date:</strong> @ev.EventDate.ToString("dd MMMM, yyyy")</p>
                         <p>@ev.EventDescription</p>
+                        <p>@ev.EventMaxAttendance</p>
+                        <p><strong>Price:</strong> @ev.EventTicketPrice.ToString("C", System.Globalization.CultureInfo.CurrentCulture)</p>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
