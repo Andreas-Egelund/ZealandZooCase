@@ -8,13 +8,22 @@ namespace ZealandZooCase.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
+        private readonly ZealandDBContext _dbContext;
 
-        public IndexModel(ILogger<IndexModel> logger)
+
+        public IndexModel(ILogger<IndexModel> logger, ZealandDBContext context)
         {
             _logger = logger;
+            _dbContext = context;
 
         }
 
+        
+
+        public OpenHour? OpenHour { get; set; }
+
+
+      
 
         public IActionResult OnPostVisKalander()
         {
@@ -32,6 +41,14 @@ namespace ZealandZooCase.Pages
                 // Already logged in — redirect to home
                 return RedirectToPage("/HomePage");
             }
+
+            // Fetch the first OpenHour record from the database
+            // Fetch the first OpenHour record from the database
+            OpenHour = _dbContext.OpenHours.FirstOrDefault();
+
+
+
+
 
             // Otherwise show login or guest option
             return Page();
