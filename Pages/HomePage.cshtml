@@ -2,6 +2,13 @@
 @model ZealandZooCase.Pages.HomePageModel
 @{
 }
+<!-- abingtider i en bader oppe i toppen af siden under menuen -->
+
+<div class="opening-hours-banner" style="background-color: rebeccapurple; color: white; padding: 10px; text-align: center; width: 100%; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+    <p style="margin: 0; font-size: 16px; font-weight: bold;">FRADAGSBAR</p>
+    <p style="margin: 0; font-size: 16px; font-weight: bold;">@Model.OpenHour.OpenHoursDate.ToString("dd MMMM, yyyy") </p>
+    <p style="margin: 0; font-size: 16px; font-weight: bold;">@Model.OpenHour.OpenHoursStart - @Model.OpenHour.OpenHoursEnd </p>
+</div>
 
 
 @if(Model.IsLoggedIn)
@@ -62,3 +69,10 @@ else
         </div>
     }
 </div>
+
+
+
+
+
+
+
