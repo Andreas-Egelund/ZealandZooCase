@@ -1,4 +1,7 @@
-﻿using ZealandZooCase.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Net.Mail;
+using System.Net;
+using ZealandZooCase.Data;
 using ZealandZooCase.Models;
 
 namespace ZealandZooCase.Services
@@ -27,5 +30,38 @@ namespace ZealandZooCase.Services
 
             return null; //Kan give problemer da username helst ikke skal være null. Måske default til "Guest"?
         }
+
+
+        public void SendMail(User user)
+        {
+            user = SetCurrentUser();
+
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress("gekija29@gmail.com");
+                mail.To.Add(user.UserEmail);
+                mail.Subject = "Mail Bekræftelse";
+                mail.Body = $"Kære, Tak for din tidsbestilling. Vi bekræfter hermed din aftale:\r\n\r\nHvis du har spørgsmål eller har brug for at ændre din tid, er du velkommen til at kontakte os på vores email som er: gekija29@gmail.com.\r\n\r\nVi ser frem til at se dig!";
+
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com")
+                {
+                    Port = 587,
+                    Credentials = new NetworkCredential(OURcredentials.GetUsername(), OURcredentials.GetPas()),
+                    EnableSsl = true
+                };
+
+
+                smtp.Send(mail);
+
+        }
+
+
+
+
+
+
     }
+
+
+
+
 }

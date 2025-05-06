@@ -30,6 +30,8 @@ namespace ZealandZooCase.Pages.AccountPages
         {
             var user = _context.Users.SingleOrDefault(u => u.UserName == Username && u.UserPassword == Password);
 
+
+
             if (user == null)
             {
                 ErrorMessage = "Invalid credentials.";

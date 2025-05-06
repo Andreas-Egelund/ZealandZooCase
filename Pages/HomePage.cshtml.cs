@@ -1,8 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Net.Mail;
+using System.Net;
 using ZealandZooCase.Data;
 using ZealandZooCase.Models;
 using ZealandZooCase.Services;
+using Humanizer;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace ZealandZooCase.Pages
 {
@@ -44,6 +48,14 @@ namespace ZealandZooCase.Pages
             {
                 IsLoggedIn = false;
             }
+
+
         }
+
+
+
+
+
+
     }
 }
