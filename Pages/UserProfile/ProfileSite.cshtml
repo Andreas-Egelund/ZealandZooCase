@@ -1,0 +1,44 @@
+﻿@page
+@model ZealandZooCase.Pages.UserProfile.ProfileSiteModel
+@{
+}
+<form method="post">
+    
+@if(Model.CurretUser != null)
+{
+    <div id="profil-side">
+        <h1>@Model.CurretUser.UserName</h1>
+        <p><strong>Email:</strong> @Model.CurretUser.UserEmail</p>
+        <hr>
+
+        <h2>Tilmeldte Events</h2>
+        <ul>
+            @foreach (var Events in Model.CurretUser.AllEventSignups)
+            {
+                <li>@Events.User</li>
+            }
+        </ul>
+
+        <hr>
+
+        <h2>Nyhedsbrev</h2>
+
+        @if (Model.CurretUser.UserNewsletter == true)
+        {
+            <p>
+                <span style="color:green;">●</span> Du er tilmeldt nyhedsbrevet.
+            </p>
+            <button type="submit" class="btn btn-outline-danger" asp-page-handler="Afmelding">Afmeld</button>
+        }
+        else
+        {
+            <p>
+                <span style="color:red;">●</span> Du er ikke tilmeldt nyhedsbrevet.
+            </p>
+            <button type="submit" class="btn btn-outline-info" asp-page-handler="Tilmelding">Tilmeld</button>
+        }
+
+    </div>
+}
+
+</form>
