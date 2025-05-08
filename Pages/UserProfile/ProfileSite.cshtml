@@ -3,27 +3,32 @@
 @{
 }
 <form method="post">
-    
-@if(Model.CurretUser != null)
-{
-    <div id="profil-side">
-        <h1>@Model.CurretUser.UserName</h1>
-        <p><strong>Email:</strong> @Model.CurretUser.UserEmail</p>
-        <hr>
 
-        <h2>Tilmeldte Events</h2>
-        <ul>
-            @foreach (var Events in Model.CurretUser.AllEventSignups)
-            {
-                <li>@Events.User</li>
-            }
-        </ul>
+    @if(Model.CurretUser != null)
+    {
+        <div id="profil-side">
+            <h1>@Model.CurretUser.UserName</h1>
+            <p><strong>Email:</strong> @Model.CurretUser.UserEmail</p>
+            <hr>
+
+            <h2>Tilmeldte Events</h2>
+
+            <ul>
+                @foreach(var item in Model.TilmeldteEvents)
+                {
+                    <li>Tilmeld af: <strong>@item.User.UserName</strong> || Event navn: <strong>@item.Event.EventName</strong> || Dato: <strong>@item.Event.EventDate.ToString("dd MMMM, yyyy")</strong></li>
+
+
+
+                }
+            </ul>
+
 
         <hr>
 
         <h2>Nyhedsbrev</h2>
 
-        @if (Model.CurretUser.UserNewsletter == true)
+        @if (Model.CurretUser.UserNewsletter)
         {
             <p>
                 <span style="color:green;">●</span> Du er tilmeldt nyhedsbrevet.

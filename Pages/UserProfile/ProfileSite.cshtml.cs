@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using ZealandZooCase.Data;
 using ZealandZooCase.Models;
 using ZealandZooCase.Services;
@@ -20,8 +21,11 @@ namespace ZealandZooCase.Pages.UserProfile
         public User? CurretUser { get; set; }
         public void OnGet()
         {
-           CurretUser =  _zealandService.SetCurrentUser();
+            CurretUser =  _zealandService.SetCurrentUser();
+
         }
+
+        public List<AllEventSignup> TilmeldteEvents => _context.AllEventSignups.Where(e => e.UserId == CurretUser.UserId).Include(e => e.Event).ToList();
 
         public IActionResult OnPostTilmelding()
         {
