@@ -4,31 +4,74 @@
 }
 <form method="post">
 
-    @if(Model.CurretUser != null)
+    @if(Model.CurrentUser != null)
     {
         <div id="profil-side">
-            <h1>@Model.CurretUser.UserName</h1>
-            <p><strong>Email:</strong> @Model.CurretUser.UserEmail</p>
+            <h1>@Model.CurrentUser.UserName</h1>
+            <p><strong>Email:</strong> @Model.CurrentUser.UserEmail</p>
             <hr>
 
             <h2>Tilmeldte Events</h2>
+                <div class="row">
+                    @foreach (var item in Model.TilmeldteEvents)
+                    {
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-2 p-2">
+                            <div class="card shadow-sm h-100" style="font-family: monospace; font-size: 0.85rem;">
+                                <div class="card-body p-2">
+                                    <h5 class="card-title text-center mb-2" style="font-size: 1rem;">Event Ticket</h5>
+                                    <div class="text-center mb-2">
+                                        <img src="/Images/@item.Event.EventImageName" class="img-fluid" style="max-height: 80px;" alt="Event image">
+                                    </div>
+                                    <hr class="my-2">
+                                    <ul class="list-unstyled mb-2">
+                                        <li><strong>Event:</strong> @item.Event.EventName</li>
+                                        <li><strong>Åbningstid:</strong> @item.Event.EventDate.ToString("dd/MM, yyyy HH:mm")</li>
+                                        <li><strong>Price:</strong> @item.Event.EventTicketPrice.ToString("F2") dkk</li>
+                                    </ul>
+                                    <hr class="my-2">
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                
 
-            <ul>
-                @foreach(var item in Model.TilmeldteEvents)
-                {
-                    <li>Tilmeld af: <strong>@item.User.UserName</strong> || Event navn: <strong>@item.Event.EventName</strong> || Dato: <strong>@item.Event.EventDate.ToString("dd MMMM, yyyy")</strong></li>
+
+            <h2 class="h5">Alle Betalte Events</h2>
+            @foreach (var item in Model.AllPaidEvents)
+            {
+                <div class="col-lg-2 col-md-3 col-sm-6 mx-2 my-2 p-2 border rounded shadow-sm">
+                    <div class="container mt-2">
+                        <div class="card shadow-sm mx-auto" style="max-width: 200px; font-family: monospace; font-size: 0.85rem;">
+                            <div class="card-body p-2">
+                                <h5 class="card-title text-center mb-2" style="font-size: 1rem;">Event Ticket</h5>
+
+                                <div class="text-center mb-2">
+                                    <img src="/Images/@item.Event.EventImageName" class="img-fluid" style="max-height: 80px;" alt="Event image">
+                                </div>
+
+                                <hr class="my-2">
+
+                                <ul class="list-unstyled mb-2">
+                                    <li><strong>Event:</strong> @item.Event.EventName</li>
+                                    <li><strong>Åbningstid:</strong> @item.Event.EventDate.ToString("dd/MM, yyyy HH:mm")</li>
+                                    <li><strong>Price:</strong> @item.Event.EventTicketPrice.ToString("F2") dkk</li>
+                                </ul>
+                                <hr class="my-2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
 
 
-
-                }
-            </ul>
-
+            
 
         <hr>
 
         <h2>Nyhedsbrev</h2>
 
-        @if (Model.CurretUser.UserNewsletter)
+        @if (Model.CurrentUser.UserNewsletter)
         {
             <p>
                 <span style="color:green;">●</span> Du er tilmeldt nyhedsbrevet.

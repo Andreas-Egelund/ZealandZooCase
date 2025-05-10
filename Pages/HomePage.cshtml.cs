@@ -43,9 +43,11 @@ namespace ZealandZooCase.Pages
         {
             OpenHour = _context.OpenHours.FirstOrDefault();
 
-            AllEvents = _context.AllOurEvents.ToList();
+            AllEvents = _context.AllOurEvents.OrderBy(e => e.EventDate).ToList();
 
             CurrentUser = _zealandService.SetCurrentUser();
+
+            RegisterEvent = new List<int>();
 
 
             if (CurrentUser != null)
@@ -69,14 +71,14 @@ namespace ZealandZooCase.Pages
 
         public List<int> RegisterEvent { get; set; }
 
-        public IActionResult OnPostTilmeld(int eventId)
+        public IActionResult OnPostTilmeld(int EventId)
         {
             
             var user = _zealandService.SetCurrentUser();
 
                 _context.AllEventSignups.Add(new AllEventSignup
                 {
-                    EventId = eventId,
+                    EventId = EventId,
                     UserId = user.UserId,
                     SignupDate = DateTime.Now
                 });
@@ -87,10 +89,10 @@ namespace ZealandZooCase.Pages
 
 
 
-        public IActionResult OnPostAfmeld(int eventId)
+        public IActionResult OnPostAfmeld(int EventId)
         {
             var user = _zealandService.SetCurrentUser();
-            var signup = _context.AllEventSignups.FirstOrDefault(s => s.EventId == eventId && s.UserId == user.UserId);
+            var signup = _context.AllEventSignups.FirstOrDefault(s => s.EventId == EventId && s.UserId == user.UserId);
             if (signup != null)
             {
                 _context.AllEventSignups.Remove(signup);
@@ -100,6 +102,19 @@ namespace ZealandZooCase.Pages
         }
 
 
+        public IActionResult OnPostGoToCheckout(int EventId)
+        {
+
+            var user = _zealandService.SetCurrentUser();
+            if (user != null)
+            {
+                return RedirectToPage("/Checkout/CheckOut", new { EventId = EventId}); //Sender eventId til checkout siden. Ren Magi  - Andreas E.
+            }
+            else
+            {
+                return RedirectToPage("/Login");
+            }
+        }
 
 
 

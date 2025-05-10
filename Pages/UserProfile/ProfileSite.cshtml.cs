@@ -18,27 +18,40 @@ namespace ZealandZooCase.Pages.UserProfile
             _context = context;
         }
 
-        public User? CurretUser { get; set; }
+        public User? CurrentUser { get; set; }
+
+        public List<AllEventSignup> TilmeldteEvents { get; set; }
+
+
+
+        public List<AllEventSignup> AllPaidEvents { get; set; }
+
+
+
         public void OnGet()
         {
-            CurretUser =  _zealandService.SetCurrentUser();
+            CurrentUser =  _zealandService.SetCurrentUser();
+
+            TilmeldteEvents = _context.AllEventSignups.Where(e => e.UserId == CurrentUser.UserId).Include(e => e.Event).OrderByDescending(e => e.SignupDate).ToList();
+
+            AllPaidEvents = _context.AllEventSignups.Where(e => e.UserId == CurrentUser.UserId && e.Event.EventTicketPrice > 0).Include(e => e.Event).OrderByDescending(e => e.SignupDate).ToList();
 
         }
 
-        public List<AllEventSignup> TilmeldteEvents => _context.AllEventSignups.Where(e => e.UserId == CurretUser.UserId).Include(e => e.Event).ToList();
+
 
         public IActionResult OnPostTilmelding()
         {
-            CurretUser = _zealandService.SetCurrentUser();
-            CurretUser.UserNewsletter = true;
+            CurrentUser = _zealandService.SetCurrentUser();
+            CurrentUser.UserNewsletter = true;
             _context.SaveChanges();
             return Page();
         }
 
         public IActionResult OnPostAfmelding()
         {
-            CurretUser = _zealandService.SetCurrentUser();
-            CurretUser.UserNewsletter = false;
+            CurrentUser = _zealandService.SetCurrentUser();
+            CurrentUser.UserNewsletter = false;
             _context.SaveChanges();
             return Page();
         }

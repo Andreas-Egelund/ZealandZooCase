@@ -1,0 +1,74 @@
+﻿@page
+@model ZealandZooCase.Pages.Checkout.CheckOutModel
+@{
+}
+
+
+
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-4 col-md-5 col-sm-6 mx-3 my-3 p-4 border rounded shadow">
+
+        <div class="container my-5">
+            <h2 class="mb-4">Payment Information</h2>
+            <form method="post">
+                <div class="mb-3">
+                    <label for="cardholderName" class="form-label">Cardholder Name</label>
+                    <input type="text" class="form-control" id="cardholderName" name="cardholderName" placeholder="Andreas Egelund" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="cardNumber" class="form-label">Card Number</label>
+                    <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="expirationDate" class="form-label">Expiration Date</label>
+                        <input type="text" class="form-control" id="expirationDate" name="expirationDate" placeholder="MM/YY" maxlength="5" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="cvv" class="form-label">CVV</label>
+                        <input type="text" class="form-control" id="cvv" name="cvv" placeholder="123" maxlength="4" required>
+                    </div>
+                </div>
+
+                <button type="submit"  name="EventId" value="@Model.CurrentEventBeingBought.EventId" asp-page-handler="CompletePurchase" class="btn btn-primary w-100">Submit Payment</button>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="col-lg-4 col-md-5 col-sm-6 mx-3 my-3 p-4 border rounded shadow">
+                <div class="container mt-5">
+                    <div class="card shadow mx-auto" style="max-width: 400px; font-family: monospace;">
+                        <div class="card-body">
+                            <h4 class="card-title text-center mb-4">Event Ticket Receipt</h4>
+
+                            <div class="text-center mb-3">
+                                <img src="/Images/@Model.CurrentEventBeingBought.EventImageName" class="img-fluid" style="max-height: 120px;" alt="Event image">
+                            </div>
+
+                            <hr>
+
+                            <ul class="list-unstyled mb-4">
+                                <li><strong>Event:</strong> @Model.CurrentEventBeingBought.EventName</li>
+                                <li><strong>Åbningstid:</strong> @Model.CurrentEventBeingBought.EventDate.ToString("dd/MM, yyyy HH:mm")</li>
+                                <li><strong>Price:</strong> @Model.CurrentEventBeingBought.EventTicketPrice.ToString("F2") dkk</li>
+                            </ul>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+    </div>
+</div>
+
+
+
+
+
