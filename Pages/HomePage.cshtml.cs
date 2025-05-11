@@ -24,15 +24,15 @@ namespace ZealandZooCase.Pages
             _context = context;
         }
 
-        public OpenHour? OpenHour { get; set; }
-        public User ?CurrentUser { get; set; }
+        public OpenHour? OpenHour => _context.OpenHours.FirstOrDefault();
+        public User ?CurrentUser => _zealandService.SetCurrentUser();
 
         public bool IsLoggedIn { get; set; }
 
 
         public List<OpenHour> OpenHours { get; set; }
 
-        public List<AllOurEvent> AllEvents { get; set; }
+        public List<AllOurEvent> AllEvents => _context.AllOurEvents.OrderBy(e => e.EventDate).ToList();
 
         public IActionResult OnPostVisKalander()
         {
@@ -41,11 +41,6 @@ namespace ZealandZooCase.Pages
 
         public void OnGet()
         {
-            OpenHour = _context.OpenHours.FirstOrDefault();
-
-            AllEvents = _context.AllOurEvents.OrderBy(e => e.EventDate).ToList();
-
-            CurrentUser = _zealandService.SetCurrentUser();
 
             RegisterEvent = new List<int>();
 
@@ -67,7 +62,7 @@ namespace ZealandZooCase.Pages
 
 
 
-        public List<AllEventSignup> AllEventSignups { get { return _context.AllEventSignups.ToList(); } }
+        public List<AllEventSignup> AllEventSignups => _context.AllEventSignups.ToList();
 
         public List<int> RegisterEvent { get; set; }
 
