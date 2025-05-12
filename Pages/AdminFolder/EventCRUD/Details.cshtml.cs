@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ZealandZooCase.Data;
 using ZealandZooCase.Models;
 
-namespace ZealandZooCase.Pages.CrudForEvents
+namespace ZealandZooCase.Pages.AdminFolder.EventCRUD
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace ZealandZooCase.Pages.CrudForEvents
             _context = context;
         }
 
-        public AllOurEvent AllOurEvent { get; set; } = default!;
+        public OurEvent OurEvent { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,14 +28,14 @@ namespace ZealandZooCase.Pages.CrudForEvents
                 return NotFound();
             }
 
-            var allourevent = await _context.AllOurEvents.FirstOrDefaultAsync(m => m.EventId == id);
-            if (allourevent == null)
+            var ourevent = await _context.AllOurEvents.FirstOrDefaultAsync(m => m.EventId == id);
+            if (ourevent == null)
             {
                 return NotFound();
             }
             else
             {
-                AllOurEvent = allourevent;
+                OurEvent = ourevent;
             }
             return Page();
         }

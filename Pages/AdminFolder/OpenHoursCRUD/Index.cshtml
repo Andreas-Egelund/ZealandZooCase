@@ -1,0 +1,48 @@
+﻿@page
+@model ZealandZooCase.Pages.AdminFolder.OpenHoursCRUD.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OpenHour[0].OpenHoursDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpenHour[0].OpenHoursStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpenHour[0].OpenHoursEnd)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.OpenHour) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenHoursDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenHoursStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenHoursEnd)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.OpenHoursId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.OpenHoursId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.OpenHoursId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

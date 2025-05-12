@@ -7,13 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Pages\AdminFolder\**" />
     <Compile Remove="Pages\UserFolder\**" />
-    <Content Remove="Pages\AdminFolder\**" />
     <Content Remove="Pages\UserFolder\**" />
-    <EmbeddedResource Remove="Pages\AdminFolder\**" />
     <EmbeddedResource Remove="Pages\UserFolder\**" />
-    <None Remove="Pages\AdminFolder\**" />
     <None Remove="Pages\UserFolder\**" />
   </ItemGroup>
 

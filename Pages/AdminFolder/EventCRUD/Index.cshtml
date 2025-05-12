@@ -1,5 +1,5 @@
 ﻿@page
-@model ZealandZooCase.Pages.CrudForEvents.IndexModel
+@model ZealandZooCase.Pages.AdminFolder.EventCRUD.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -14,31 +14,31 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.AllOurEvent[0].EventName)
+                @Html.DisplayNameFor(model => model.OurEvent[0].EventName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AllOurEvent[0].EventDescription)
+                @Html.DisplayNameFor(model => model.OurEvent[0].EventDescription)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AllOurEvent[0].EventDate)
+                @Html.DisplayNameFor(model => model.OurEvent[0].EventDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AllOurEvent[0].EventMaxAttendance)
+                @Html.DisplayNameFor(model => model.OurEvent[0].EventMaxAttendance)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AllOurEvent[0].EventTicketPrice)
+                @Html.DisplayNameFor(model => model.OurEvent[0].EventTicketPrice)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AllOurEvent[0].EventImageName)
+                @Html.DisplayNameFor(model => model.OurEvent[0].EventImageName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AllOurEvent[0].Address)
+                @Html.DisplayNameFor(model => model.OurEvent[0].Address)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.AllOurEvent) {
+@foreach (var item in Model.OurEvent) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.EventName)
@@ -59,7 +59,7 @@
                 @Html.DisplayFor(modelItem => item.EventImageName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Address.AddressId)
+                    @($"{item.Address.Street}, {item.Address.AddressPostalcodeNavigation.City}, {item.Address.AddressPostalcodeNavigation.State}, {item.Address.AddressPostalcodeNavigation.Country}"))
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.EventId">Edit</a> |

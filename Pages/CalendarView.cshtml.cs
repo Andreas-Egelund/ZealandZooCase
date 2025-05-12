@@ -20,7 +20,7 @@ namespace ZealandZooCase.Pages
 
 
 
-        public List<AllOurEvent> UpcomingEvents { get; set; } = new();
+        public List<OurEvent> UpcomingEvents { get; set; } = new();
         public DateTime CurrentMonth { get; set; }
 
         public void OnGet(string? month)
@@ -43,7 +43,7 @@ namespace ZealandZooCase.Pages
                 .ToList();
         }
 
-        public List<AllOurEvent> GetEventsForDate(DateTime date) =>
+        public List<OurEvent> GetEventsForDate(DateTime date) =>
             UpcomingEvents.Where(e => e.EventDate.Date == date.Date).ToList();
 
 

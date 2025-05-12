@@ -26,5 +26,5 @@ public partial class Address
     public virtual ZipCode AddressPostalcodeNavigation { get; set; } = null!;
 
     [InverseProperty("Address")]
-    public virtual ICollection<AllOurEvent> AllOurEvents { get; set; } = new List<AllOurEvent>();
+    public virtual ICollection<OurEvent> AllOurEvents { get; set; } = new List<OurEvent>();
 }

@@ -20,7 +20,7 @@ public partial class ZealandDBContext : DbContext
 
     public virtual DbSet<AllEventSignup> AllEventSignups { get; set; }
 
-    public virtual DbSet<AllOurEvent> AllOurEvents { get; set; }
+    public virtual DbSet<OurEvent> AllOurEvents { get; set; }
 
     public virtual DbSet<OpenHour> OpenHours { get; set; }
 
@@ -57,7 +57,7 @@ public partial class ZealandDBContext : DbContext
                 .HasConstraintName("FK_allEventSignups_Users");
         });
 
-        modelBuilder.Entity<AllOurEvent>(entity =>
+        modelBuilder.Entity<OurEvent>(entity =>
         {
             entity.HasKey(e => e.EventId).HasName("PK__AllOurEv__2370F72766D30366");
 

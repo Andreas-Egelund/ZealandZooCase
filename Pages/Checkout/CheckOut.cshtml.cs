@@ -24,7 +24,7 @@ namespace ZealandZooCase.Pages.Checkout
         }
 
 
-        public AllOurEvent CurrentEventBeingBought { get; set; }
+        public OurEvent CurrentEventBeingBought { get; set; }
 
         public User CurrentUser { get; set; }
 
@@ -32,6 +32,7 @@ namespace ZealandZooCase.Pages.Checkout
 
         public void OnGet(int EventId)
         {
+
       
             CurrentEventBeingBought = _dbContext.AllOurEvents.FirstOrDefault(e => e.EventId == EventId);
 

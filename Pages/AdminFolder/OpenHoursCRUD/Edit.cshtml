@@ -1,0 +1,45 @@
+﻿@page
+@model ZealandZooCase.Pages.AdminFolder.OpenHoursCRUD.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>OpenHour</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OpenHour.OpenHoursId" />
+            <div class="form-group">
+                <label asp-for="OpenHour.OpenHoursDate" class="control-label"></label>
+                <input asp-for="OpenHour.OpenHoursDate" class="form-control" />
+                <span asp-validation-for="OpenHour.OpenHoursDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpenHour.OpenHoursStart" class="control-label"></label>
+                <input asp-for="OpenHour.OpenHoursStart" class="form-control" />
+                <span asp-validation-for="OpenHour.OpenHoursStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpenHour.OpenHoursEnd" class="control-label"></label>
+                <input asp-for="OpenHour.OpenHoursEnd" class="form-control" />
+                <span asp-validation-for="OpenHour.OpenHoursEnd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

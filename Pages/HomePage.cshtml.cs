@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Net.Mail;
 using System.Net;
@@ -32,15 +32,20 @@ namespace ZealandZooCase.Pages
 
         public List<OpenHour> OpenHours { get; set; }
 
-        public List<AllOurEvent> AllEvents => _context.AllOurEvents.OrderBy(e => e.EventDate).ToList();
+        public List<OurEvent> AllEvents => _context.AllOurEvents.OrderBy(e => e.EventDate).ToList();
 
         public IActionResult OnPostVisKalander()
         {
             return RedirectToPage("/CalendarView");
         }
 
+        public string ErrorMessage { get; set; }
+
+
         public void OnGet()
         {
+
+            
 
             RegisterEvent = new List<int>();
 
@@ -68,8 +73,18 @@ namespace ZealandZooCase.Pages
 
         public IActionResult OnPostTilmeld(int EventId)
         {
-            
-            var user = _zealandService.SetCurrentUser();
+            var currentEvent = _context.AllOurEvents.FirstOrDefault(e => e.EventId == EventId);
+            var NumberofUsersSignedUp = _context.AllEventSignups.Where(s => s.EventId == EventId).Count();
+
+
+            if (currentEvent.EventMaxAttendance <= NumberofUsersSignedUp)
+            {
+                ErrorMessage = "Der er ikke plads til flere på dette event.";
+            }
+            else
+            {
+
+                var user = _zealandService.SetCurrentUser();
 
                 _context.AllEventSignups.Add(new AllEventSignup
                 {
@@ -79,7 +94,10 @@ namespace ZealandZooCase.Pages
                 });
                 _context.SaveChanges();
 
-           return RedirectToPage("/HomePage");
+                return RedirectToPage("/HomePage");
+            }
+
+            return Page();
         }
 
 

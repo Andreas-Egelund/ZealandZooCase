@@ -23,7 +23,7 @@ public partial class AllEventSignup
 
     [ForeignKey("EventId")]
     [InverseProperty("AllEventSignups")]
-    public virtual AllOurEvent Event { get; set; } = null!;
+    public virtual OurEvent Event { get; set; } = null!;
 
     [ForeignKey("UserId")]
     [InverseProperty("AllEventSignups")]

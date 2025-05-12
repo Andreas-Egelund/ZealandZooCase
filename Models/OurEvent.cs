@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ZealandZooCase.Models;
 
-public partial class AllOurEvent
+public partial class OurEvent
 {
     [Key]
     [Column("event_id")]

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ZealandZooCase.Data;
 using ZealandZooCase.Models;
 
-namespace ZealandZooCase.Pages.CrudForEvents
+namespace ZealandZooCase.Pages.AdminFolder.OpenHoursCRUD
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace ZealandZooCase.Pages.CrudForEvents
         }
 
         [BindProperty]
-        public AllOurEvent AllOurEvent { get; set; } = default!;
+        public OpenHour OpenHour { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,15 +29,15 @@ namespace ZealandZooCase.Pages.CrudForEvents
                 return NotFound();
             }
 
-            var allourevent = await _context.AllOurEvents.FirstOrDefaultAsync(m => m.EventId == id);
+            var openhour = await _context.OpenHours.FirstOrDefaultAsync(m => m.OpenHoursId == id);
 
-            if (allourevent == null)
+            if (openhour == null)
             {
                 return NotFound();
             }
             else
             {
-                AllOurEvent = allourevent;
+                OpenHour = openhour;
             }
             return Page();
         }
@@ -49,11 +49,11 @@ namespace ZealandZooCase.Pages.CrudForEvents
                 return NotFound();
             }
 
-            var allourevent = await _context.AllOurEvents.FindAsync(id);
-            if (allourevent != null)
+            var openhour = await _context.OpenHours.FindAsync(id);
+            if (openhour != null)
             {
-                AllOurEvent = allourevent;
-                _context.AllOurEvents.Remove(AllOurEvent);
+                OpenHour = openhour;
+                _context.OpenHours.Remove(OpenHour);
                 await _context.SaveChangesAsync();
             }
 

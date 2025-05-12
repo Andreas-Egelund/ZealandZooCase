@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using ZealandZooCase.Data;
 using ZealandZooCase.Models;
 
-namespace ZealandZooCase.Pages.CrudForEvents
+namespace ZealandZooCase.Pages.AdminFolder.UserCRUD
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace ZealandZooCase.Pages.CrudForEvents
         }
 
         [BindProperty]
-        public AllOurEvent AllOurEvent { get; set; } = default!;
+        public User User { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,13 +30,12 @@ namespace ZealandZooCase.Pages.CrudForEvents
                 return NotFound();
             }
 
-            var allourevent =  await _context.AllOurEvents.FirstOrDefaultAsync(m => m.EventId == id);
-            if (allourevent == null)
+            var user =  await _context.Users.FirstOrDefaultAsync(m => m.UserId == id);
+            if (user == null)
             {
                 return NotFound();
             }
-            AllOurEvent = allourevent;
-           ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId");
+            User = user;
             return Page();
         }
 
@@ -49,7 +48,7 @@ namespace ZealandZooCase.Pages.CrudForEvents
                 return Page();
             }
 
-            _context.Attach(AllOurEvent).State = EntityState.Modified;
+            _context.Attach(User).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +56,7 @@ namespace ZealandZooCase.Pages.CrudForEvents
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AllOurEventExists(AllOurEvent.EventId))
+                if (!UserExists(User.UserId))
                 {
                     return NotFound();
                 }
@@ -70,9 +69,9 @@ namespace ZealandZooCase.Pages.CrudForEvents
             return RedirectToPage("./Index");
         }
 
-        private bool AllOurEventExists(int id)
+        private bool UserExists(int id)
         {
-            return _context.AllOurEvents.Any(e => e.EventId == id);
+            return _context.Users.Any(e => e.UserId == id);
         }
     }
 }

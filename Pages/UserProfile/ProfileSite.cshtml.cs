@@ -20,16 +20,22 @@ namespace ZealandZooCase.Pages.UserProfile
 
         public User? CurrentUser => _zealandService.SetCurrentUser();
 
-        public List<AllEventSignup> TilmeldteEvents => _context.AllEventSignups.Where(e => e.UserId == CurrentUser.UserId).Include(e => e.Event).OrderByDescending(e => e.SignupDate).ToList();
 
 
 
-        public List<AllEventSignup> AllPaidEvents => _context.AllEventSignups.Where(e => e.UserId == CurrentUser.UserId && e.Event.EventTicketPrice > 0).Include(e => e.Event).OrderByDescending(e => e.SignupDate).ToList();
+        public IQueryable<AllEventSignup> TilmeldteEvents => _context.AllEventSignups.Where(e => e.UserId == CurrentUser.UserId).Include(e => e.Event).OrderByDescending(e => e.SignupDate);
+
+
+
+        public IQueryable<AllEventSignup> AllPaidEvents => _context.AllEventSignups.Where(e => e.UserId == CurrentUser.UserId && e.Event.EventTicketPrice > 0).Include(e => e.Event).OrderByDescending(e => e.SignupDate);
 
 
 
         public void OnGet()
         {
+            TilmeldteEvents.ToList(); //Her exekveres query til at hente alle tilmeldte events
+            AllPaidEvents.ToList(); //Her exekveres query til at hente alle betalte events
+
         }
 
 

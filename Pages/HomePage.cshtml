@@ -62,8 +62,14 @@ else
                         <p><strong>Date:</strong> @ev.EventDate.ToString("dd MMMM, yyyy")</p>
                         <p>@ev.EventDescription</p>
                         <p> <strong>Max Attendance:</strong> @Model.AllEventSignups.Count(e => e.EventId == ev.EventId) || @ev.EventMaxAttendance</p>
-                        <p><strong>Price:</strong> @ev.EventTicketPrice.ToString("C", System.Globalization.CultureInfo.CurrentCulture)</p>
-
+                        @if(ev.EventTicketPrice > 0)
+                        {
+                            <p><strong>Ticket Price:</strong> @ev.EventTicketPrice.ToString("C", System.Globalization.CultureInfo.CurrentCulture)</p>
+                        }
+                        else
+                        {
+                            <strong>Ticket Price:</strong><p style="color: green"> Free</p>
+                        }
                     </div>
 
                     <div class="modal-footer">
