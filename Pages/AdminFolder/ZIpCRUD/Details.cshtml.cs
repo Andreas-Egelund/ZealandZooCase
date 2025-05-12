@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ZealandZooCase.Data;
 using ZealandZooCase.Models;
 
-namespace ZealandZooCase.Pages.AdminFolder.EventCrud
+namespace ZealandZooCase.Pages.AdminFolder.ZIpCRUD
 {
     public class DetailsModel : PageModel
     {
@@ -19,23 +19,23 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
             _context = context;
         }
 
-        public OurEvent OurEvent { get; set; } = default!;
+        public ZipCode ZipCode { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var ourevent = await _context.AllOurEvents.FirstOrDefaultAsync(m => m.EventId == id);
-            if (ourevent == null)
+            var zipcode = await _context.ZipCodes.FirstOrDefaultAsync(m => m.Postalcode == id);
+            if (zipcode == null)
             {
                 return NotFound();
             }
             else
             {
-                OurEvent = ourevent;
+                ZipCode = zipcode;
             }
             return Page();
         }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using ZealandZooCase.Data;
 using ZealandZooCase.Models;
 
-namespace ZealandZooCase.Pages.AdminFolder.EventCRUD
+namespace ZealandZooCase.Pages.AdminFolder.EventCrud
 {
     public class EditModel : PageModel
     {
@@ -23,50 +23,67 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCRUD
         [BindProperty]
         public OurEvent OurEvent { get; set; } = default!;
 
+        [BindProperty]
+        public string Street { get; set; }
+
+        [BindProperty]
+        public string PostalCode { get; set; }
+
+        public SelectList PostalCodeList { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var ourevent =  await _context.AllOurEvents.Include(o => o.Address).ThenInclude(a => a.AddressPostalcodeNavigation).FirstOrDefaultAsync(m => m.EventId == id);
-            if (ourevent == null)
-            {
-                return NotFound();
-            }
-            OurEvent = ourevent;
+            OurEvent = await _context.AllOurEvents
+                .Include(e => e.Address)
+                .ThenInclude(a => a.AddressPostalcodeNavigation)
+                .FirstOrDefaultAsync(m => m.EventId == id);
+
+            if (OurEvent == null) return NotFound();
+
+            // Pre-fill address form values
+            Street = OurEvent.Address?.Street;
+            PostalCode = OurEvent.Address?.AddressPostalcode;
+
+            // Fill postal code dropdown (use Postalcode as both value and display)
+            PostalCodeList = new SelectList(await _context.ZipCodes.ToListAsync(), "Postalcode", "Postalcode");
+
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+
+
+            var existingEvent = await _context.AllOurEvents
+                .Include(e => e.Address)
+                .FirstOrDefaultAsync(e => e.EventId == OurEvent.EventId);
+
+            if (existingEvent == null) return NotFound();
+
+            // Update event core fields
+            existingEvent.EventName = OurEvent.EventName;
+            existingEvent.EventDescription = OurEvent.EventDescription;
+            existingEvent.EventDate = OurEvent.EventDate;
+            existingEvent.EventMaxAttendance = OurEvent.EventMaxAttendance;
+            existingEvent.EventTicketPrice = OurEvent.EventTicketPrice;
+            existingEvent.EventImageName = OurEvent.EventImageName;
+
+            // Lookup ZipCode info
+            var selectedZip = await _context.ZipCodes.FirstOrDefaultAsync(z => z.Postalcode == PostalCode);
+            if (selectedZip == null)
             {
+                ModelState.AddModelError("PostalCode", "Invalid postal code selected.");
+                PostalCodeList = new SelectList(await _context.ZipCodes.ToListAsync(), "Postalcode", "Postalcode");
                 return Page();
             }
 
-            _context.Attach(OurEvent).State = EntityState.Modified;
+            // Update address
+            existingEvent.Address.Street = Street;
+            existingEvent.Address.AddressPostalcode = selectedZip.Postalcode;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!OurEventExists(OurEvent.EventId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await _context.SaveChangesAsync();
             return RedirectToPage("./Index");
         }
 
@@ -75,4 +92,6 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCRUD
             return _context.AllOurEvents.Any(e => e.EventId == id);
         }
     }
+
+
 }

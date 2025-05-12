@@ -1,5 +1,5 @@
 ﻿@page
-@model ZealandZooCase.Pages.AdminFolder.EventCRUD.IndexModel
+@model ZealandZooCase.Pages.AdminFolder.EventCrud.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -59,7 +59,7 @@
                 @Html.DisplayFor(modelItem => item.EventImageName)
             </td>
             <td>
-                    @($"{item.Address.Street}, {item.Address.AddressPostalcodeNavigation.City}, {item.Address.AddressPostalcodeNavigation.State}, {item.Address.AddressPostalcodeNavigation.Country}"))
+                @Html.DisplayFor(modelItem => item.Address.Street)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.EventId">Edit</a> |

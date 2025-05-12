@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using ZealandZooCase.Data;
 using ZealandZooCase.Models;
 
-namespace ZealandZooCase.Pages.AdminFolder.EventCrud
+namespace ZealandZooCase.Pages.AdminFolder.ZIpCRUD
 {
     public class CreateModel : PageModel
     {
@@ -21,12 +21,11 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
 
         public IActionResult OnGet()
         {
-        ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId");
             return Page();
         }
 
         [BindProperty]
-        public OurEvent OurEvent { get; set; } = default!;
+        public ZipCode ZipCode { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -36,7 +35,7 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
                 return Page();
             }
 
-            _context.AllOurEvents.Add(OurEvent);
+            _context.ZipCodes.Add(ZipCode);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

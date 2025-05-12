@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ZealandZooCase.Data;
 using ZealandZooCase.Models;
 
-namespace ZealandZooCase.Pages.AdminFolder.EventCrud
+namespace ZealandZooCase.Pages.AdminFolder.ZIpCRUD
 {
     public class IndexModel : PageModel
     {
@@ -19,12 +19,11 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
             _context = context;
         }
 
-        public IList<OurEvent> OurEvent { get;set; } = default!;
+        public IList<ZipCode> ZipCode { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            OurEvent = await _context.AllOurEvents
-                .Include(o => o.Address).ToListAsync();
+            ZipCode = await _context.ZipCodes.ToListAsync();
         }
     }
 }
