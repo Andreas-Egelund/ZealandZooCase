@@ -19,7 +19,7 @@ namespace ZealandZooCase.Services
 
         public User SetCurrentUser()
         {
-            if(_httpContextAccessor.HttpContext?.Session.GetString("Username") != null)
+            if (_httpContextAccessor.HttpContext?.Session.GetString("Username") != null)
             {
                 string username = _httpContextAccessor.HttpContext?.Session.GetString("Username");
 
@@ -32,9 +32,10 @@ namespace ZealandZooCase.Services
         }
 
 
-        public void SendMail(User user)
+        public void SendMail(User user, OurEvent events)
         {
-            user = SetCurrentUser();
+ 
+
 
                 MailMessage mail = new MailMessage();
                 mail.From = new MailAddress("gekija29@gmail.com");
@@ -51,17 +52,7 @@ namespace ZealandZooCase.Services
 
 
                 smtp.Send(mail);
-
         }
 
-
-
-
-
-
     }
-
-
-
-
 }
