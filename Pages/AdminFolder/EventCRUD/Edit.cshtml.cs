@@ -24,7 +24,7 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
         public OurEvent OurEvent { get; set; } = default!;
 
         [BindProperty]
-        public string Street { get; set; }
+        public string StreetFromForm { get; set; }
 
         [BindProperty]
         public string PostalCode { get; set; }
@@ -43,7 +43,7 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
             if (OurEvent == null) return NotFound();
 
             // Pre-fill address form values
-            Street = OurEvent.Address?.Street;
+            StreetFromForm = OurEvent.Address?.Street;
             PostalCode = OurEvent.Address?.AddressPostalcode;
 
             // Fill postal code dropdown (use Postalcode as both value and display)
@@ -80,8 +80,15 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
             }
 
             // Update address
-            existingEvent.Address.Street = Street;
-            existingEvent.Address.AddressPostalcode = selectedZip.Postalcode;
+
+            var newAddress = new Address()
+            {
+                Street = StreetFromForm,
+                AddressPostalcode = selectedZip.Postalcode
+            };
+
+            existingEvent.Address = newAddress;
+         
 
             await _context.SaveChangesAsync();
             return RedirectToPage("./Index");

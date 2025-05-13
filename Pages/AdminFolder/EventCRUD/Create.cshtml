@@ -23,10 +23,31 @@
                 <input asp-for="OurEvent.EventDescription" class="form-control" />
                 <span asp-validation-for="OurEvent.EventDescription" class="text-danger"></span>
             </div>
+
+
+
+
+
+            <!-- Street input -->
             <div class="form-group">
-                <label asp-for="OurEvent.AddressId" class="control-label"></label>
-                <select asp-for="OurEvent.AddressId" class ="form-control" asp-items="ViewBag.AddressId"></select>
+                <label asp-for="StreetFromForm" class="control-label">Street</label>
+                <input asp-for="StreetFromForm" class="form-control" />
+                <span asp-validation-for="StreetFromForm" class="text-danger"></span>
             </div>
+
+            <!-- Postal code dropdown -->
+            <div class="form-group">
+                <label asp-for="PostalCodeFromForm" class="control-label">Postal Code</label>
+                <select asp-for="PostalCodeFromForm" class="form-control" asp-items="Model.PostalCodeList"></select>
+                <span asp-validation-for="PostalCodeFromForm" class="text-danger"></span>
+            </div>
+
+
+
+
+
+
+
             <div class="form-group">
                 <label asp-for="OurEvent.EventDate" class="control-label"></label>
                 <input asp-for="OurEvent.EventDate" class="form-control" />

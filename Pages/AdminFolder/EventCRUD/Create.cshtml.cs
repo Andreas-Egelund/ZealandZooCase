@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using ZealandZooCase.Data;
 using ZealandZooCase.Models;
 using ZealandZooCase.Services;
@@ -24,15 +25,29 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
 
         public IActionResult OnGet()
         {
-        ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId");
+            // Fill postal code dropdown (use Postalcode as both value and display)
+            PostalCodeList = new SelectList( _context.ZipCodes.ToList(), "Postalcode", "Postalcode");
+
+
             return Page();
         }
 
         [BindProperty]
         public OurEvent OurEvent { get; set; } = default!;
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
-        
+
+        [BindProperty]
+        public string StreetFromForm { get; set; }
+
+        [BindProperty]
+        public string PostalCodeFromForm { get; set; }
+
+
+        public SelectList PostalCodeList { get; set; }
+
+
+
+
         public async Task<IActionResult> OnPostAsync()
         {
             var OurCustomer = _context.Users.Where(u => u.UserNewsletter == true).ToList();
@@ -40,6 +55,40 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
             //{
             //    return Page();
             //}
+
+
+
+            // Lookup ZipCode info
+            var selectedZip = await _context.ZipCodes.FirstOrDefaultAsync(z => z.Postalcode == PostalCodeFromForm);
+            if (selectedZip == null)
+            {
+                ModelState.AddModelError("PostalCode", "Invalid postal code selected.");
+                PostalCodeList = new SelectList(await _context.ZipCodes.ToListAsync(), "Postalcode", "Postalcode");
+                return Page();
+            }
+
+
+            if(_context.Addresses.Any(a => a.Street == StreetFromForm && a.AddressPostalcode == selectedZip.Postalcode))
+            {
+                var existingAddress = _context.Addresses.FirstOrDefault(a => a.Street == StreetFromForm && a.AddressPostalcode == selectedZip.Postalcode);
+                OurEvent.Address = existingAddress;
+            }
+            else
+            {
+
+                var newAddress = new Address()
+                {
+                    Street = StreetFromForm,
+                    AddressPostalcode = selectedZip.Postalcode
+                };
+
+                OurEvent.Address = newAddress;
+
+
+            }
+
+
+
 
             var AddEvent = _context.AllOurEvents.Add(OurEvent);
             await _context.SaveChangesAsync();

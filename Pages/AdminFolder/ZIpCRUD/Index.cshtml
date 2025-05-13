@@ -14,6 +14,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.ZipCode[0].Postalcode)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ZipCode[0].City)
             </th>
             <th>
@@ -28,6 +31,9 @@
     <tbody>
 @foreach (var item in Model.ZipCode) {
         <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Postalcode)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.City)
             </td>

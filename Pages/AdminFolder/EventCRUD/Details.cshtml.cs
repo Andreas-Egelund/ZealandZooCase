@@ -28,7 +28,7 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
                 return NotFound();
             }
 
-            var ourevent = await _context.AllOurEvents.FirstOrDefaultAsync(m => m.EventId == id);
+            var ourevent = await _context.AllOurEvents.Include(e => e.Address).ThenInclude(a => a.AddressPostalcodeNavigation).FirstOrDefaultAsync(m => m.EventId == id);
             if (ourevent == null)
             {
                 return NotFound();
