@@ -1,0 +1,49 @@
+﻿@page
+@model ZealandZooCase.Pages.AdminFolder.ZIpCRUD.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>ZipCode</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ZipCode.Postalcode" class="control-label"></label>
+                <input asp-for="ZipCode.Postalcode" class="form-control" />
+                <span asp-validation-for="ZipCode.Postalcode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZipCode.City" class="control-label"></label>
+                <input asp-for="ZipCode.City" class="form-control" />
+                <span asp-validation-for="ZipCode.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZipCode.State" class="control-label"></label>
+                <input asp-for="ZipCode.State" class="form-control" />
+                <span asp-validation-for="ZipCode.State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZipCode.Country" class="control-label"></label>
+                <input asp-for="ZipCode.Country" class="form-control" />
+                <span asp-validation-for="ZipCode.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

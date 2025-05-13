@@ -1,69 +1,78 @@
 ﻿@page
-@model ZealandZooCase.Pages.AdminFolder.EventCRUD.EditModel
+@model ZealandZooCase.Pages.AdminFolder.EventCrud.EditModel
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit Event</h1>
+<h1>Edit</h1>
+
+<h4>OurEvent</h4>
 <hr />
-<form method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="OurEvent.EventId" />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OurEvent.EventId" />
+            <div class="form-group">
+                <label asp-for="OurEvent.EventName" class="control-label"></label>
+                <input asp-for="OurEvent.EventName" class="form-control" />
+                <span asp-validation-for="OurEvent.EventName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OurEvent.EventDescription" class="control-label"></label>
+                <input asp-for="OurEvent.EventDescription" class="form-control" />
+                <span asp-validation-for="OurEvent.EventDescription" class="text-danger"></span>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="OurEvent.EventName"></label>
-        <input asp-for="OurEvent.EventName" class="form-control" />
-        <span asp-validation-for="OurEvent.EventName" class="text-danger"></span>
+
+
+
+            <!-- Street input -->
+            <div class="form-group">
+                <label asp-for="Street" class="control-label">Street</label>
+                <input asp-for="Street" class="form-control" />
+                <span asp-validation-for="Street" class="text-danger"></span>
+            </div>
+
+            <!-- Postal code dropdown -->
+            <div class="form-group">
+                <label asp-for="PostalCode" class="control-label">Postal Code</label>
+                <select asp-for="PostalCode" class="form-control" asp-items="Model.PostalCodeList"></select>
+                <span asp-validation-for="PostalCode" class="text-danger"></span>
+            </div>
+
+
+
+
+
+
+            <div class="form-group">
+                <label asp-for="OurEvent.EventDate" class="control-label"></label>
+                <input asp-for="OurEvent.EventDate" class="form-control" />
+                <span asp-validation-for="OurEvent.EventDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OurEvent.EventMaxAttendance" class="control-label"></label>
+                <input asp-for="OurEvent.EventMaxAttendance" class="form-control" />
+                <span asp-validation-for="OurEvent.EventMaxAttendance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OurEvent.EventTicketPrice" class="control-label"></label>
+                <input asp-for="OurEvent.EventTicketPrice" class="form-control" />
+                <span asp-validation-for="OurEvent.EventTicketPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OurEvent.EventImageName" class="control-label"></label>
+                <input asp-for="OurEvent.EventImageName" class="form-control" />
+                <span asp-validation-for="OurEvent.EventImageName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-
-    <div class="form-group">
-        <label asp-for="OurEvent.EventDescription"></label>
-        <input asp-for="OurEvent.EventDescription" class="form-control" />
-        <span asp-validation-for="OurEvent.EventDescription" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="OurEvent.Address.Street">Street</label>
-        <input asp-for="OurEvent.Address.Street" class="form-control" />
-        <span asp-validation-for="OurEvent.Address.Street" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="OurEvent.Address.AddressPostalcode">Postal Code</label>
-        <select asp-for="OurEvent.Address.AddressPostalcode" class="form-control" asp-items="ViewBag.AddressPostalcode"></select>
-        <span asp-validation-for="OurEvent.Address.AddressPostalcode" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="OurEvent.EventDate"></label>
-        <input asp-for="OurEvent.EventDate" class="form-control" />
-        <span asp-validation-for="OurEvent.EventDate" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="OurEvent.EventMaxAttendance"></label>
-        <input asp-for="OurEvent.EventMaxAttendance" class="form-control" />
-        <span asp-validation-for="OurEvent.EventMaxAttendance" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="OurEvent.EventTicketPrice"></label>
-        <input asp-for="OurEvent.EventTicketPrice" class="form-control" />
-        <span asp-validation-for="OurEvent.EventTicketPrice" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="OurEvent.EventImageName"></label>
-        <input asp-for="OurEvent.EventImageName" class="form-control" />
-        <span asp-validation-for="OurEvent.EventImageName" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <input type="submit" value="Save Changes" class="btn btn-primary" />
-    </div>
-</form>
-
+</div>
 
 <div>
     <a asp-page="./Index">Back to List</a>

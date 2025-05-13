@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ZealandZooCase.Data;
 using ZealandZooCase.Models;
 
-namespace ZealandZooCase.Pages.AdminFolder.EventCrud
+namespace ZealandZooCase.Pages.AdminFolder.ZIpCRUD
 {
     public class DeleteModel : PageModel
     {
@@ -20,40 +20,40 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
         }
 
         [BindProperty]
-        public OurEvent OurEvent { get; set; } = default!;
+        public ZipCode ZipCode { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var ourevent = await _context.AllOurEvents.FirstOrDefaultAsync(m => m.EventId == id);
+            var zipcode = await _context.ZipCodes.FirstOrDefaultAsync(m => m.Postalcode == id);
 
-            if (ourevent == null)
+            if (zipcode == null)
             {
                 return NotFound();
             }
             else
             {
-                OurEvent = ourevent;
+                ZipCode = zipcode;
             }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var ourevent = await _context.AllOurEvents.FindAsync(id);
-            if (ourevent != null)
+            var zipcode = await _context.ZipCodes.FindAsync(id);
+            if (zipcode != null)
             {
-                OurEvent = ourevent;
-                _context.AllOurEvents.Remove(OurEvent);
+                ZipCode = zipcode;
+                _context.ZipCodes.Remove(ZipCode);
                 await _context.SaveChangesAsync();
             }
 

@@ -9,7 +9,7 @@ using ZealandZooCase.Data;
 using ZealandZooCase.Models;
 using ZealandZooCase.Services;
 
-namespace ZealandZooCase.Pages.AdminFolder.EventCRUD
+namespace ZealandZooCase.Pages.AdminFolder.EventCrud
 {
     public class CreateModel : PageModel
     {
@@ -24,8 +24,8 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCRUD
 
         public IActionResult OnGet()
         {
-            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId");
-                return Page();
+        ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId");
+            return Page();
         }
 
         [BindProperty]
