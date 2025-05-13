@@ -52,7 +52,7 @@
             @Html.DisplayNameFor(model => model.OurEvent.Address)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.OurEvent.Address.AddressId)
+            @($"{Model.OurEvent.Address.Street}, {Model.OurEvent.Address.AddressPostalcodeNavigation.City}, {Model.OurEvent.Address.AddressPostalcodeNavigation.State}, {Model.OurEvent.Address.AddressPostalcodeNavigation.Country}"))
         </dd>
     </dl>
     
