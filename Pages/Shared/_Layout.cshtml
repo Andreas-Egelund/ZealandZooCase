@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ZealandZooCase.styles.css" asp-append-version="true" />
+    @inject ZealandZooCase.Services.ZealandService ZealandService
+
 </head>
 <body>
     <header>
@@ -23,26 +25,44 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/HomePage">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/AdminFolder/UserCRUD/Index">UserCRUD</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/AdminFolder/EventCRUD/Index">EventCRUD</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/AdminFolder/ZipCRUD/Index">ZipCRUD</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/CalendarView">Calendar</a>
                         </li>
-                        @inject ZealandZooCase.Services.ZealandService ZealandService
-                        @if (ZealandService.SetCurrentUser() != null)
+
+                        @if( ZealandService.SetCurrentUser() != null && ZealandService.SetCurrentUser().UserIsAdmin)
                         {
+
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/UserProfile/ProfileSite">Profile</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/AdminFolder/UserCRUD/Index">UserCRUD</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/AdminFolder/EventCRUD/Index">EventCRUD</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/AdminFolder/AddressCRUD/Index">AddressCRUD</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/AdminFolder/ZipCRUD/Index">ZipCRUD</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/AdminFolder/OpenHoursCRUD/Index">ÅbningsTiderCRUD</a>
                             </li>
                         }
 
                     </ul>
+
+                    @if (ZealandService.SetCurrentUser() != null)
+                    {
+
+                        <!-- Right-side item -->
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/UserProfile/ProfileSite">Profile</a>
+                            </li>
+                        </ul>
+                    }
+
+
+
                 </div>
             </div>
         </nav>
