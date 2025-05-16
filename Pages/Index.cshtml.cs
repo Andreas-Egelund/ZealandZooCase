@@ -10,12 +10,14 @@ namespace ZealandZooCase.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly ZealandDBContext _dbContext;
+        private readonly ZealandService _service;
 
 
-        public IndexModel(ILogger<IndexModel> logger, ZealandDBContext context)
+        public IndexModel(ILogger<IndexModel> logger, ZealandDBContext context, ZealandService service)
         {
             _logger = logger;
             _dbContext = context;
+            _service = service;
 
         }
 
@@ -32,29 +34,31 @@ namespace ZealandZooCase.Pages
         }
 
 
+
         public IActionResult OnGet()
         {
+            // Retrieve the username from the session
+            var user = _service.SetCurrentUser();
 
-
-            var username = HttpContext.Session.GetString("Username");
-
-            if (!string.IsNullOrEmpty(username))
-            {
-                // Already logged in — redirect to home
-                return RedirectToPage("/HomePage");
-            }
-
-            // Fetch the first OpenHour record from the database
-            // Fetch the first OpenHour record from the database
+            // If not logged in, fetch the first OpenHour record from the database
             OpenHour = _dbContext.OpenHours.FirstOrDefault();
 
 
+            // Check if the user is already logged in
+            if (user != null)
+            {
+                // If logged in, redirect to the home page
+                return RedirectToPage("/HomePage");
+            }
 
 
-
-            // Otherwise show login or guest option
+            // Display the login or guest option page
             return Page();
         }
+
+
+
+
 
         public IActionResult OnPostContinueAsGuest()
         {

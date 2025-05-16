@@ -31,6 +31,10 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
 
             var ourevent = await _context.AllOurEvents.FirstOrDefaultAsync(m => m.EventId == id);
 
+
+
+
+
             if (ourevent == null)
             {
                 return NotFound();
@@ -50,9 +54,17 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
             }
 
             var ourevent = await _context.AllOurEvents.Include(e => e.Address).ThenInclude(a => a.AddressPostalcodeNavigation).FirstOrDefaultAsync(m => m.EventId == id);
+
+
             if (ourevent != null)
             {
                 OurEvent = ourevent;
+                // Remove the event signups associated with this event
+                var eventSignups = await _context.AllEventSignups.Where(es => es.EventId == OurEvent.EventId).ToListAsync();
+                _context.AllEventSignups.RemoveRange(eventSignups);
+
+                await _context.SaveChangesAsync();
+            
                 _context.AllOurEvents.Remove(OurEvent);
                 await _context.SaveChangesAsync();
             }
