@@ -49,11 +49,12 @@
             @Html.DisplayFor(model => model.OurEvent.EventImageName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.OurEvent.Address)
+            @Html.DisplayNameFor(model => model.OurEvent.AddressId)
         </dt>
         <dd class="col-sm-10">
-            @($"{Model.OurEvent.Address.Street}, {Model.OurEvent.Address.AddressPostalcodeNavigation.City}, {Model.OurEvent.Address.AddressPostalcodeNavigation.State}, {Model.OurEvent.Address.AddressPostalcodeNavigation.Country}"))
+            @Html.DisplayFor(model => model.OurEvent.AddressId)
         </dd>
+
     </dl>
     
     <form method="post">
