@@ -44,9 +44,6 @@ namespace ZealandZooCase.Pages
 
         public void OnGet()
         {
-
-            
-
             RegisterEvent = new List<int>();
 
 

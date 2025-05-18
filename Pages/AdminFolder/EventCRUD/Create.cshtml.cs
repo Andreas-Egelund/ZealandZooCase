@@ -50,7 +50,6 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var OurCustomer = _context.Users.Where(u => u.UserNewsletter == true).ToList();
             //if (!ModelState.IsValid)
             //{
             //    return Page();
@@ -87,8 +86,7 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
 
             }
 
-
-
+            var OurCustomer = _context.Users.Where(u => u.UserNewsletter == true).ToList();
 
             var AddEvent = _context.AllOurEvents.Add(OurEvent);
             await _context.SaveChangesAsync();

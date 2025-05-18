@@ -25,8 +25,11 @@
                                     <hr class="my-2">
                                     <ul class="list-unstyled mb-2">
                                         <li><strong>Event:</strong> @item.Event.EventName</li>
+                                         <!--Benytter ToString() til at formartere datoen-->
                                         <li><strong>Åbningstid:</strong> @item.Event.EventDate.ToString("dd/MM, yyyy HH:mm")</li>
-                                        <li><strong>Price:</strong> @item.Event.EventTicketPrice.ToString("F2") dkk</li>
+
+                                        <!--Benytter ToString() til at formattere tal frem for mange descimaler-->
+                                        <li><strong>Price:</strong> @item.Event.EventTicketPrice.ToString("F2") dkk</li> 
                                     </ul>
                                     <hr class="my-2">
                                 </div>

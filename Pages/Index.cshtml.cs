@@ -19,7 +19,7 @@ namespace ZealandZooCase.Pages
 
         }
 
-        
+        public List<OurEvent> UpcomingEvents { get; set; }
 
         public OpenHour? OpenHour { get; set; }
 
