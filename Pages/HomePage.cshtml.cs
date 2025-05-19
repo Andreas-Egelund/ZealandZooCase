@@ -83,7 +83,7 @@ namespace ZealandZooCase.Pages
 
                 var user = _zealandService.SetCurrentUser();
 
-                _context.AllEventSignups.Add(new AllEventSignup
+                var TilmeldteEvent =_context.AllEventSignups.Add(new AllEventSignup
                 {
                     EventId = EventId,
                     UserId = user.UserId,
@@ -91,10 +91,16 @@ namespace ZealandZooCase.Pages
                 });
                 _context.SaveChanges();
 
-                return RedirectToPage("/HomePage");
+                _zealandService.SendMailTilmeldteUsers(user, currentEvent);
+
+
+                return RedirectToPage("/UserProfile/ProfileSite");
+
             }
 
-            return Page();
+
+            return RedirectToPage("/UserProfile/ProfileSite");
+
         }
 
 
@@ -107,8 +113,11 @@ namespace ZealandZooCase.Pages
             {
                 _context.AllEventSignups.Remove(signup);
                 _context.SaveChanges();
+
             }
-            return RedirectToPage("/HomePage");
+
+
+            return RedirectToPage("/UserProfile/ProfileSite");
         }
 
 

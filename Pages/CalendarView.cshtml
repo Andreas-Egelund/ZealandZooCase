@@ -104,6 +104,40 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                     </div>
+
+
+                                                    @if (Model.RegisterEvent.Contains(ev.EventId) && ev.EventTicketPrice <= 0)
+                                                    {
+                                                        <form method="post">
+                                                            <div class="modal-footer">
+                                                                <button type="submit" name="EventId" value="@ev.EventId" class="btn btn-outline-danger" asp-page="/HomePage" asp-page-handler="Afmeld">Afmeld mig</button>
+                                                            </div>
+                                                        </form>
+                                                    }
+                                                    else if (Model.RegisterEvent.Contains(ev.EventId) && ev.EventTicketPrice > 0)
+                                                    {
+                                                        <p>Ingen Refund Taber</p>
+                                                    }
+                                                    else if (!Model.RegisterEvent.Contains(ev.EventId) && ev.EventTicketPrice <= 0 && Model.CurrentUser != null)
+                                                    {
+                                                        <form method="post">
+                                                            <div class="modal-footer">
+                                                                <button type="submit" name="EventId" value="@ev.EventId" class="btn btn-secondary" asp-page="/HomePage" asp-page-handler="Tilmeld">Tilmeld mig</button>
+                                                            </div>
+                                                        </form>
+                                                    }
+                                                    else if (!Model.RegisterEvent.Contains(ev.EventId) && ev.EventTicketPrice >= 0 && Model.CurrentUser != null)
+                                                    {
+                                                        <form method="post">
+                                                            <div class="modal-footer">
+                                                                <button type="submit" name="EventId" value="@ev.EventId" class="btn btn-secondary" asp-page="/HomePage" asp-page-handler="GoToCheckout">Køb Billet</button>
+                                                            </div>
+                                                        </form>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>Tilmelding Kræver Login</p>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
