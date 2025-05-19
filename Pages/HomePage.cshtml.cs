@@ -68,6 +68,7 @@ namespace ZealandZooCase.Pages
 
         public List<int> RegisterEvent { get; set; }
 
+
         public IActionResult OnPostTilmeld(int EventId)
         {
             var currentEvent = _context.AllOurEvents.FirstOrDefault(e => e.EventId == EventId);
