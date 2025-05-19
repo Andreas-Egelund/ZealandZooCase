@@ -22,14 +22,14 @@ namespace ZealandZooCase.Pages.AdminFolder.UserCRUD
         [BindProperty]
         public User User { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users.FirstOrDefaultAsync(m => m.UserId == id);
+            var user =  _context.Users.FirstOrDefault(m => m.UserId == id);
 
             if (user == null)
             {
@@ -42,22 +42,22 @@ namespace ZealandZooCase.Pages.AdminFolder.UserCRUD
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public IActionResult OnPost(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users.FindAsync(id);
+            var user =  _context.Users.Find(id);
             if (user != null)
             {
                 User = user;
                 // Remove the user from the AllEventSignups collection
-                List<AllEventSignup> signups = await _context.AllEventSignups.Where(s => s.UserId == id).ToListAsync();
+                List<AllEventSignup> signups =  _context.AllEventSignups.Where(s => s.UserId == id).ToList();
                 _context.AllEventSignups.RemoveRange(signups);
                 _context.Users.Remove(User);
-                await _context.SaveChangesAsync();
+                 _context.SaveChanges();
             }
 
             return RedirectToPage("./Index");

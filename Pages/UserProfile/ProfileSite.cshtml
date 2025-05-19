@@ -2,7 +2,6 @@
 @model ZealandZooCase.Pages.UserProfile.ProfileSiteModel
 @{
 }
-<form method="post">
 
     @if(Model.CurrentUser != null)
     {
@@ -68,25 +67,34 @@
             
 
         <hr>
+        <form method="post">
+            <h2>Nyhedsbrev</h2>
 
-        <h2>Nyhedsbrev</h2>
+            @if (Model.CurrentUser.UserNewsletter)
+            {
+                <p>
+                    <span style="color:green;">●</span> Du er tilmeldt nyhedsbrevet.
+                </p>
+                <button type="submit" class="btn btn-outline-danger" asp-page-handler="Afmelding">Afmeld</button>
+            }
+            else
+            {
+                <p>
+                    <span style="color:red;">●</span> Du er ikke tilmeldt nyhedsbrevet.
+                </p>
+                <button type="submit" class="btn btn-outline-info" asp-page-handler="Tilmelding">Tilmeld</button>
+            }
+        </form>
 
-        @if (Model.CurrentUser.UserNewsletter)
-        {
-            <p>
-                <span style="color:green;">●</span> Du er tilmeldt nyhedsbrevet.
-            </p>
-            <button type="submit" class="btn btn-outline-danger" asp-page-handler="Afmelding">Afmeld</button>
-        }
-        else
-        {
-            <p>
-                <span style="color:red;">●</span> Du er ikke tilmeldt nyhedsbrevet.
-            </p>
-            <button type="submit" class="btn btn-outline-info" asp-page-handler="Tilmelding">Tilmeld</button>
-        }
+
+
+        <form method="post">
+            <h2>Log ud</h2>
+            <button type="submit" class="btn btn-outline-danger" asp-page-handler="Logout">Log ud</button>
+        </form>
+
+
 
     </div>
 }
 
-</form>

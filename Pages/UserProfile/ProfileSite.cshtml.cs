@@ -60,6 +60,14 @@ namespace ZealandZooCase.Pages.UserProfile
         }
 
 
+        public IActionResult OnPostLogout()
+        {
+            // Logger brugeren ud og sletter sessionen
+            HttpContext.Session.Clear();
+            return RedirectToPage("/Index");
+        }
+
+
 
     }
 }
