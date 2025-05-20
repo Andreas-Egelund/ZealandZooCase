@@ -22,12 +22,10 @@ namespace ZealandZooCase.Pages
 
 
 
-
         public void OnGet()
         {
 
             AllOfOurEvents = _context.AllOurEvents.ToList();
-
 
 
 

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using ZealandZooCase.Data;
 using ZealandZooCase.Models;
-
 namespace ZealandZooCase.Pages.AccountPages
 {
     public class RegisterModel : PageModel

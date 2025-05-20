@@ -24,6 +24,8 @@ public partial class ZealandDBContext : DbContext
 
     public virtual DbSet<OpenHour> OpenHours { get; set; }
 
+    public virtual DbSet<Product> Products { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<ZipCode> ZipCodes { get; set; }
@@ -68,7 +70,12 @@ public partial class ZealandDBContext : DbContext
 
         modelBuilder.Entity<OpenHour>(entity =>
         {
-            entity.HasKey(e => e.OpenHoursId).HasName("PK__OpenHour__BA5097B836FDCE7C");
+            entity.HasKey(e => e.OpenHoursId).HasName("PK__OpenHour__BA5097B89F4926B3");
+        });
+
+        modelBuilder.Entity<Product>(entity =>
+        {
+            entity.HasKey(e => e.ProductId).HasName("PK__products__47027DF59D7BD6B3");
         });
 
         modelBuilder.Entity<User>(entity =>
