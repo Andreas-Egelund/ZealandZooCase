@@ -4,18 +4,27 @@
 }
 
 
-<h2>Login</h2>
 
-<form method="post">
-    <div>
-        <label>Username or Email:</label>
-        <input type="text" name="UsernameOrEmail" required />
-    </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" name="Password" required />
-    </div>
-    <button type="submit">Login</button>
-</form>
+<div class="container d-flex flex-column align-items-center justify-content-center vh-100 bg-light p-5 rounded-4 shadow-lg">
 
-<p style="color:red">@Model.ErrorMessage</p>
+    <h2 class="display-5 fw-bold text-primary mb-4">🔐 Login</h2>
+
+    <form method="post" class="w-100" style="max-width: 400px;">
+        <div class="mb-3">
+            <label for="UsernameOrEmail" class="form-label">Username or Email</label>
+            <input type="text" class="form-control" id="UsernameOrEmail" name="UsernameOrEmail" required />
+        </div>
+
+        <div class="mb-4">
+            <label for="Password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="Password" name="Password" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg w-100">Login</button>
+    </form>
+
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <p class="text-danger mt-3 fw-semibold">@Model.ErrorMessage</p>
+    }
+</div>
