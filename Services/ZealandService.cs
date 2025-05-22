@@ -32,60 +32,6 @@ namespace ZealandZooCase.Services
         }
 
 
-        public void SendMail(User user, OurEvent events)
-        {
- 
-
-
-                MailMessage mail = new MailMessage();
-                mail.From = new MailAddress("gekija29@gmail.com");
-                mail.To.Add(user.UserEmail);
-                mail.Subject = "Mail Bekræftelse";
-                mail.Body = $"Kære, Tak for din tidsbestilling. Vi bekræfter hermed din aftale:\r\n\r\nHvis du har spørgsmål eller har brug for at ændre din tid, er du velkommen til at kontakte os på vores email som er: gekija29@gmail.com.\r\n\r\nVi ser frem til at se dig!";
-
-                SmtpClient smtp = new SmtpClient("smtp.gmail.com")
-                {
-                    Port = 587,
-                    Credentials = new NetworkCredential(OURcredentials.GetUsername(), OURcredentials.GetPas()),
-                    EnableSsl = true
-                };
-
-
-                smtp.Send(mail);
-        }
-
-
-
-        public void SendMailTilmeldteUsers(User user, OurEvent ourEvent)
-        {
-            user = SetCurrentUser();
-
-
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("gekija29@gmail.com");
-            mail.To.Add(user.UserEmail);
-            mail.Subject = "New Event posted On Zealand Zoo";
-            mail.Body = $"Hello {user.UserName}\n" +
-                $"A new event has been posted for you to join!!!\n" +
-                $"{ourEvent.EventName}\n" +
-                $"Event date: {ourEvent.EventDate.ToString("dd-MM-yyyy")}\n" +
-                $"Description: {ourEvent.EventDescription}\n" +
-                $"We hope to see you there!\n" +
-                $"Zealand Zoo";
-
-            SmtpClient smtp = new SmtpClient("smtp.gmail.com")
-            {
-                Port = 587,
-                Credentials = new NetworkCredential(OURcredentials.GetUsername(), OURcredentials.GetPas()),
-                EnableSsl = true
-            };
-
-
-            smtp.Send(mail);
-
-
-        }
-
 
 
 

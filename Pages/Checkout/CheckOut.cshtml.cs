@@ -15,12 +15,14 @@ namespace ZealandZooCase.Pages.Checkout
 
         private readonly ZealandDBContext _dbContext;
         private readonly ZealandService _zealandService;
+        private readonly MailSenderService _mailSenderService;
 
 
-        public CheckOutModel(ZealandDBContext context, ZealandService service)
+        public CheckOutModel(ZealandDBContext context, ZealandService service, MailSenderService mailSenderService)
         {
             _dbContext = context;
             _zealandService = service;
+            _mailSenderService = mailSenderService;
         }
 
 
@@ -44,6 +46,10 @@ namespace ZealandZooCase.Pages.Checkout
         public IActionResult OnPostCompletePurchase(int EventId)
         {
 
+
+            CurrentEventBeingBought = _dbContext.AllOurEvents.FirstOrDefault(e => e.EventId == EventId);
+
+
             var user = _zealandService.SetCurrentUser();
 
                 _dbContext.AllEventSignups.Add(new AllEventSignup
@@ -52,7 +58,11 @@ namespace ZealandZooCase.Pages.Checkout
                     UserId = user.UserId,
                     SignupDate = DateTime.Now
                 });
-                _dbContext.SaveChanges();
+            _mailSenderService.SendMail(user, CurrentEventBeingBought);
+
+            _dbContext.SaveChanges();
+
+
 
             return RedirectToPage("/HomePage");
 
