@@ -47,7 +47,7 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
             PostalCode = OurEvent.Address?.AddressPostalcode;
 
             // Fill postal code dropdown (use Postalcode as both value and display)
-            PostalCodeList = new SelectList(await _context.ZipCodes.ToListAsync(), "Postalcode", "Postalcode");
+            PostalCodeList = new SelectList(await _context.ZipCodes.OrderBy(z => z.Postalcode).ToListAsync(), "Postalcode", "Postalcode");
 
             return Page();
         }

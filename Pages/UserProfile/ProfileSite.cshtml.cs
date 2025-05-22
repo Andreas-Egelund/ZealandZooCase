@@ -69,5 +69,23 @@ namespace ZealandZooCase.Pages.UserProfile
 
 
 
+
+        public IActionResult OnPostUnsubscribeFromEvent(int eventId)
+        {
+            // Henter den tilmeldte event fra databasen
+            var signup = _context.AllEventSignups.FirstOrDefault(e => e.UserId == CurrentUser.UserId && e.EventId == eventId);
+            if (signup != null)
+            {
+                // Sletter den tilmeldte event
+                _context.AllEventSignups.Remove(signup);
+                _context.SaveChanges();
+            }
+            return Page();
+
+        }
+
+
+
+
     }
 }

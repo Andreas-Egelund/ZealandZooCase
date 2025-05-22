@@ -36,7 +36,7 @@ namespace ZealandZooCase.Pages.AdminFolder.AddressCRUD
                 return NotFound();
             }
             Address = address;
-           ViewData["AddressPostalcode"] = new SelectList(_context.ZipCodes, "Postalcode", "Postalcode");
+           ViewData["AddressPostalcode"] = new SelectList(_context.ZipCodes.OrderBy(z => z.Postalcode), "Postalcode", "Postalcode");
             return Page();
         }
 

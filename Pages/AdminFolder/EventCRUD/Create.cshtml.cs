@@ -62,7 +62,7 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
             if (selectedZip == null)
             {
                 ModelState.AddModelError("PostalCode", "Invalid postal code selected.");
-                PostalCodeList = new SelectList(await _context.ZipCodes.ToListAsync(), "Postalcode", "Postalcode");
+                PostalCodeList = new SelectList(await _context.ZipCodes.OrderBy(z => z.Postalcode).ToListAsync(), "Postalcode", "Postalcode");
                 return Page();
             }
 

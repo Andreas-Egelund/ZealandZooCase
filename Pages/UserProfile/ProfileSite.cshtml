@@ -30,6 +30,12 @@
                                 <li><strong>Price:</strong> @item.Event.EventTicketPrice.ToString("F2") dkk</li>
                             </ul>
                             <hr class="my-2">
+                            @if (item.Event.EventTicketPrice <= 0)
+                            {
+                                <form method="post">
+                                    <button type="submit" class="btn btn-outline-danger" asp-page-handler="UnsubscribeFromEvent" name="eventId" value="@item.EventId">Unsubscribe</button>
+                                </form>
+                            }
                         </div>
                     </div>
                 </div>
