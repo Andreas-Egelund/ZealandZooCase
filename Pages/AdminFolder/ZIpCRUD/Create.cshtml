@@ -4,46 +4,51 @@
 @{
     ViewData["Title"] = "Create";
 }
+<h1 style="text-align: center; color: #2c3e50;">Create Zip Code</h1>
 
-<h1>Create</h1>
+<div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif;">
+    <h4 style="color: #34495e;">Zip Code</h4>
+    <hr style="margin-bottom: 20px;" />
 
-<h4>ZipCode</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ZipCode.Postalcode" class="control-label"></label>
-                <input asp-for="ZipCode.Postalcode" class="form-control" />
-                <span asp-validation-for="ZipCode.Postalcode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ZipCode.City" class="control-label"></label>
-                <input asp-for="ZipCode.City" class="form-control" />
-                <span asp-validation-for="ZipCode.City" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ZipCode.State" class="control-label"></label>
-                <input asp-for="ZipCode.State" class="form-control" />
-                <span asp-validation-for="ZipCode.State" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ZipCode.Country" class="control-label"></label>
-                <input asp-for="ZipCode.Country" class="form-control" />
-                <span asp-validation-for="ZipCode.Country" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger" style="margin-bottom: 15px;"></div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label asp-for="ZipCode.Postalcode" class="control-label" style="font-weight: bold;"></label>
+            <input asp-for="ZipCode.Postalcode" class="form-control" style="width: 100%; padding: 8px;" />
+            <span asp-validation-for="ZipCode.Postalcode" class="text-danger" style="font-size: 0.9em;"></span>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label asp-for="ZipCode.City" class="control-label" style="font-weight: bold;"></label>
+            <input asp-for="ZipCode.City" class="form-control" style="width: 100%; padding: 8px;" />
+            <span asp-validation-for="ZipCode.City" class="text-danger" style="font-size: 0.9em;"></span>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label asp-for="ZipCode.State" class="control-label" style="font-weight: bold;"></label>
+            <input asp-for="ZipCode.State" class="form-control" style="width: 100%; padding: 8px;" />
+            <span asp-validation-for="ZipCode.State" class="text-danger" style="font-size: 0.9em;"></span>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label asp-for="ZipCode.Country" class="control-label" style="font-weight: bold;"></label>
+            <input asp-for="ZipCode.Country" class="form-control" style="width: 100%; padding: 8px;" />
+            <span asp-validation-for="ZipCode.Country" class="text-danger" style="font-size: 0.9em;"></span>
+        </div>
+
+        <div class="form-group" style="text-align: center;">
+            <input type="submit" value="Create" style="padding: 10px 20px; background-color: #3498db; color: white; border: none; border-radius: 5px;" />
+        </div>
+    </form>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a asp-page="Index" style="color: #3498db; text-decoration: none;">&#8592; Back to List</a>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

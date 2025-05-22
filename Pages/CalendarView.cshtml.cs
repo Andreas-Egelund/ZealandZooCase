@@ -18,15 +18,10 @@ namespace ZealandZooCase.Pages
             _zealandService = zealandService;
         }
 
-
-
-
         public User? CurrentUser => _zealandService.SetCurrentUser();
         public string ErrorMessage { get; set; }
         public bool IsLoggedIn { get; set; }
         public List<int> RegisterEvent { get; set; }
-
-
         public List<OurEvent> UpcomingEvents { get; set; } = new();
         public DateTime CurrentMonth { get; set; }
 
@@ -43,6 +38,7 @@ namespace ZealandZooCase.Pages
             {
                 CurrentMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
             }
+
 
             var firstDay = new DateTime(CurrentMonth.Year, CurrentMonth.Month, 1);
             var lastDay = firstDay.AddMonths(1).AddDays(-1);
@@ -71,20 +67,6 @@ namespace ZealandZooCase.Pages
 
         public List<OurEvent> GetEventsForDate(DateTime date) =>
             UpcomingEvents.Where(e => e.EventDate.Date == date.Date).ToList();
-
-
-
-
-
-
-       
-
-
-
-
-
-
-
 
 
 

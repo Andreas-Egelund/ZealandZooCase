@@ -5,80 +5,75 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 style="text-align: center; color: #2c3e50;">Create Event</h1>
 
-<h4>OurEvent</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="OurEvent.EventName" class="control-label"></label>
-                <input asp-for="OurEvent.EventName" class="form-control" />
-                <span asp-validation-for="OurEvent.EventName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OurEvent.EventDescription" class="control-label"></label>
-                <input asp-for="OurEvent.EventDescription" class="form-control" />
-                <span asp-validation-for="OurEvent.EventDescription" class="text-danger"></span>
-            </div>
+<div style="max-width: 700px; margin: 0 auto; font-family: Arial, sans-serif;">
+    <h4 style="color: #34495e;">Event Information</h4>
+    <hr style="margin-bottom: 20px;" />
 
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger" style="margin-bottom: 15px;"></div>
 
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label asp-for="OurEvent.EventName" style="font-weight: bold;"></label>
+            <input asp-for="OurEvent.EventName" class="form-control" />
+            <span asp-validation-for="OurEvent.EventName" class="text-danger" style="font-size: 0.9em;"></span>
+        </div>
 
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label asp-for="OurEvent.EventDescription" style="font-weight: bold;"></label>
+            <input asp-for="OurEvent.EventDescription" class="form-control" />
+            <span asp-validation-for="OurEvent.EventDescription" class="text-danger" style="font-size: 0.9em;"></span>
+        </div>
 
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label asp-for="StreetFromForm" style="font-weight: bold;">Street</label>
+            <input asp-for="StreetFromForm" class="form-control" />
+            <span asp-validation-for="StreetFromForm" class="text-danger" style="font-size: 0.9em;"></span>
+        </div>
 
-            <!-- Street input -->
-            <div class="form-group">
-                <label asp-for="StreetFromForm" class="control-label">Street</label>
-                <input asp-for="StreetFromForm" class="form-control" />
-                <span asp-validation-for="StreetFromForm" class="text-danger"></span>
-            </div>
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label asp-for="PostalCodeFromForm" style="font-weight: bold;">Postal Code</label>
+            <select asp-for="PostalCodeFromForm" class="form-control" asp-items="Model.PostalCodeList"></select>
+            <span asp-validation-for="PostalCodeFromForm" class="text-danger" style="font-size: 0.9em;"></span>
+        </div>
 
-            <!-- Postal code dropdown -->
-            <div class="form-group">
-                <label asp-for="PostalCodeFromForm" class="control-label">Postal Code</label>
-                <select asp-for="PostalCodeFromForm" class="form-control" asp-items="Model.PostalCodeList"></select>
-                <span asp-validation-for="PostalCodeFromForm" class="text-danger"></span>
-            </div>
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label asp-for="OurEvent.EventDate" style="font-weight: bold;"></label>
+            <input asp-for="OurEvent.EventDate" class="form-control" />
+            <span asp-validation-for="OurEvent.EventDate" class="text-danger" style="font-size: 0.9em;"></span>
+        </div>
 
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label asp-for="OurEvent.EventMaxAttendance" style="font-weight: bold;"></label>
+            <input asp-for="OurEvent.EventMaxAttendance" class="form-control" />
+            <span asp-validation-for="OurEvent.EventMaxAttendance" class="text-danger" style="font-size: 0.9em;"></span>
+        </div>
 
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label asp-for="OurEvent.EventTicketPrice" style="font-weight: bold;"></label>
+            <input asp-for="OurEvent.EventTicketPrice" class="form-control" />
+            <span asp-validation-for="OurEvent.EventTicketPrice" class="text-danger" style="font-size: 0.9em;"></span>
+        </div>
 
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label asp-for="OurEvent.EventImageName" style="font-weight: bold;"></label>
+            <input asp-for="OurEvent.EventImageName" class="form-control" />
+            <span asp-validation-for="OurEvent.EventImageName" class="text-danger" style="font-size: 0.9em;"></span>
+        </div>
 
+        <div style="text-align: center;">
+            <input type="submit" value="Create" style="padding: 10px 20px; background-color: #3498db; color: white; border: none; border-radius: 5px;" />
+        </div>
+    </form>
 
-
-
-            <div class="form-group">
-                <label asp-for="OurEvent.EventDate" class="control-label"></label>
-                <input asp-for="OurEvent.EventDate" class="form-control" />
-                <span asp-validation-for="OurEvent.EventDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OurEvent.EventMaxAttendance" class="control-label"></label>
-                <input asp-for="OurEvent.EventMaxAttendance" class="form-control" />
-                <span asp-validation-for="OurEvent.EventMaxAttendance" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OurEvent.EventTicketPrice" class="control-label"></label>
-                <input asp-for="OurEvent.EventTicketPrice" class="form-control" />
-                <span asp-validation-for="OurEvent.EventTicketPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OurEvent.EventImageName" class="control-label"></label>
-                <input asp-for="OurEvent.EventImageName" class="form-control" />
-                <span asp-validation-for="OurEvent.EventImageName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <div style="text-align: center; margin-top: 20px;">
+        <a asp-page="Index" style="color: #3498db; text-decoration: none;">&#8592; Back to List</a>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

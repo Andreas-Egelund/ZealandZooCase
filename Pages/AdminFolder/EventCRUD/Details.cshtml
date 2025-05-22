@@ -5,57 +5,67 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 style="text-align: center; color: #2c3e50;">Event Details</h1>
 
-<div>
-    <h4>OurEvent</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
+<div style="max-width: 800px; margin: 0 auto; font-family: Arial, sans-serif;">
+    <h4 style="color: #34495e;">Event Information</h4>
+    <hr style="margin-bottom: 20px;" />
+
+    <dl style="display: flex; flex-wrap: wrap;">
+        <dt style="flex: 0 0 30%; font-weight: bold; padding: 8px 0;">
             @Html.DisplayNameFor(model => model.OurEvent.EventName)
         </dt>
-        <dd class="col-sm-10">
+        <dd style="flex: 0 0 70%; padding: 8px 0;">
             @Html.DisplayFor(model => model.OurEvent.EventName)
         </dd>
-        <dt class="col-sm-2">
+
+        <dt style="flex: 0 0 30%; font-weight: bold; padding: 8px 0;">
             @Html.DisplayNameFor(model => model.OurEvent.EventDescription)
         </dt>
-        <dd class="col-sm-10">
+        <dd style="flex: 0 0 70%; padding: 8px 0;">
             @Html.DisplayFor(model => model.OurEvent.EventDescription)
         </dd>
-        <dt class="col-sm-2">
+
+        <dt style="flex: 0 0 30%; font-weight: bold; padding: 8px 0;">
             @Html.DisplayNameFor(model => model.OurEvent.EventDate)
         </dt>
-        <dd class="col-sm-10">
+        <dd style="flex: 0 0 70%; padding: 8px 0;">
             @Html.DisplayFor(model => model.OurEvent.EventDate)
         </dd>
-        <dt class="col-sm-2">
+
+        <dt style="flex: 0 0 30%; font-weight: bold; padding: 8px 0;">
             @Html.DisplayNameFor(model => model.OurEvent.EventMaxAttendance)
         </dt>
-        <dd class="col-sm-10">
+        <dd style="flex: 0 0 70%; padding: 8px 0;">
             @Html.DisplayFor(model => model.OurEvent.EventMaxAttendance)
         </dd>
-        <dt class="col-sm-2">
+
+        <dt style="flex: 0 0 30%; font-weight: bold; padding: 8px 0;">
             @Html.DisplayNameFor(model => model.OurEvent.EventTicketPrice)
         </dt>
-        <dd class="col-sm-10">
+        <dd style="flex: 0 0 70%; padding: 8px 0;">
             @Html.DisplayFor(model => model.OurEvent.EventTicketPrice)
         </dd>
-        <dt class="col-sm-2">
+
+        <dt style="flex: 0 0 30%; font-weight: bold; padding: 8px 0;">
             @Html.DisplayNameFor(model => model.OurEvent.EventImageName)
         </dt>
-        <dd class="col-sm-10">
+        <dd style="flex: 0 0 70%; padding: 8px 0;">
             @Html.DisplayFor(model => model.OurEvent.EventImageName)
         </dd>
-        <dt class="col-sm-2">
+
+        <dt style="flex: 0 0 30%; font-weight: bold; padding: 8px 0;">
             @Html.DisplayNameFor(model => model.OurEvent.Address)
         </dt>
-        <dd class="col-sm-10">
-                    @($"{Model.OurEvent.Address.Street}, {Model.OurEvent.Address.AddressPostalcodeNavigation.City}, {Model.OurEvent.Address.AddressPostalcodeNavigation.State}, {Model.OurEvent.Address.AddressPostalcodeNavigation.Country}")
+        <dd style="flex: 0 0 70%; padding: 8px 0;">
+            @($"{Model.OurEvent.Address.Street}, {Model.OurEvent.Address.AddressPostalcodeNavigation.City}, {Model.OurEvent.Address.AddressPostalcodeNavigation.State}, {Model.OurEvent.Address.AddressPostalcodeNavigation.Country}")
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.OurEvent.EventId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <a asp-page="./Edit" asp-route-id="@Model.OurEvent.EventId"
+           style="padding: 10px 15px; background-color: #3498db; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;">Edit</a>
+        <a asp-page="./Index"
+           style="padding: 10px 15px; background-color: #95a5a6; color: white; text-decoration: none; border-radius: 5px;">Back to List</a>
+    </div>
 </div>

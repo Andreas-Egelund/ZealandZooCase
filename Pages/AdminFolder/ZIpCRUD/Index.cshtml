@@ -4,51 +4,62 @@
 @{
     ViewData["Title"] = "Index";
 }
+<h1 style="text-align: center; color: #2c3e50;">Zip Codes</h1>
 
-<h1>Index</h1>
-
-<p>
-    <a asp-page="Create">Create New</a>
+<p style="text-align: right; margin-bottom: 20px;">
+    <a asp-page="Create" style="padding: 10px 15px; background-color: #3498db; color: white; text-decoration: none; border-radius: 5px;">Create New</a>
 </p>
-<table class="table">
+
+<table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
     <thead>
-        <tr>
-            <th>
+        <tr style="background-color: #f2f2f2;">
+            <th style="padding: 10px; border: 1px solid #ddd;">
                 @Html.DisplayNameFor(model => model.ZipCode[0].Postalcode)
             </th>
-            <th>
+            <th style="padding: 10px; border: 1px solid #ddd;">
                 @Html.DisplayNameFor(model => model.ZipCode[0].City)
             </th>
-            <th>
+            <th style="padding: 10px; border: 1px solid #ddd;">
                 @Html.DisplayNameFor(model => model.ZipCode[0].State)
             </th>
-            <th>
+            <th style="padding: 10px; border: 1px solid #ddd;">
                 @Html.DisplayNameFor(model => model.ZipCode[0].Country)
             </th>
-            <th></th>
+            <th style="padding: 10px; border: 1px solid #ddd;"></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.ZipCode) {
-        <tr>
-            <td>
+        @foreach (var item in Model.ZipCode)
+        {
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">
                     @Html.DisplayFor(modelItem => item.Postalcode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.State)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Postalcode">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Postalcode">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Postalcode">Delete</a>
-            </td>
-        </tr>
-}
+                </td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
+                    <a asp-page="./Edit" asp-route-id="@item.Postalcode"
+                       style="padding: 6px 12px; background-color: #3498db; color: white; border: none; border-radius: 5px; text-decoration: none; margin-right: 5px;">
+                        Edit
+                    </a>
+                    <a asp-page="./Details" asp-route-id="@item.Postalcode"
+                       style="padding: 6px 12px; background-color: #7f8c8d; color: white; border: none; border-radius: 5px; text-decoration: none; margin-right: 5px;">
+                        Details
+                    </a>
+                    <a asp-page="./Delete" asp-route-id="@item.Postalcode"
+                       style="padding: 6px 12px; background-color: #e74c3c; color: white; border: none; border-radius: 5px; text-decoration: none;">
+                        Delete
+                    </a>
+                </td>
+
+            </tr>
+        }
     </tbody>
 </table>

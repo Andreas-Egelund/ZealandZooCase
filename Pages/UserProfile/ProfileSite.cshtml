@@ -2,99 +2,87 @@
 @model ZealandZooCase.Pages.UserProfile.ProfileSiteModel
 @{
 }
+@if (Model.CurrentUser != null)
+{
+    <div id="profil-side">
+        <h1>@Model.CurrentUser.UserName</h1>
+        <p><strong>Email:</strong> @Model.CurrentUser.UserEmail</p>
+        <hr>
 
-    @if(Model.CurrentUser != null)
-    {
-        <div id="profil-side">
-            <h1>@Model.CurrentUser.UserName</h1>
-            <p><strong>Email:</strong> @Model.CurrentUser.UserEmail</p>
-            <hr>
-
-            <h2>Tilmeldte Events</h2>
-                <div class="row">
-                    @foreach (var item in Model.TilmeldteEvents)
-                    {
-                        <div class="col-6 col-sm-4 col-md-3 col-lg-2 p-2">
-                            <div class="card shadow-sm h-100" style="font-family: monospace; font-size: 0.85rem;">
-                                <div class="card-body p-2">
-                                    <h5 class="card-title text-center mb-2" style="font-size: 1rem;">Event Ticket</h5>
-                                    <div class="text-center mb-2">
-                                        <img src="/Images/@item.Event.EventImageName" class="img-fluid" style="max-height: 80px;" alt="Event image">
-                                    </div>
-                                    <hr class="my-2">
-                                    <ul class="list-unstyled mb-2">
-                                        <li><strong>Event:</strong> @item.Event.EventName</li>
-                                         <!--Benytter ToString() til at formartere datoen-->
-                                        <li><strong>Åbningstid:</strong> @item.Event.EventDate.ToString("dd/MM, yyyy HH:mm")</li>
-
-                                        <!--Benytter ToString() til at formattere tal frem for mange descimaler-->
-                                        <li><strong>Price:</strong> @item.Event.EventTicketPrice.ToString("F2") dkk</li> 
-                                    </ul>
-                                    <hr class="my-2">
-                                </div>
+        <h2>Registered Events</h2>
+        <div class="row">
+            @foreach (var item in Model.TilmeldteEvents)
+            {
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2 p-2">
+                    <div class="card shadow-sm h-100" style="font-family: monospace; font-size: 0.85rem;">
+                        <div class="card-body p-2">
+                            <h5 class="card-title text-center mb-2" style="font-size: 1rem;">Event Ticket</h5>
+                            <div class="text-center mb-2">
+                                <img src="/Images/@item.Event.EventImageName" class="img-fluid" style="max-height: 80px;" alt="Event image">
                             </div>
-                        </div>
-                    }
-                </div>
-                
+                            <hr class="my-2">
+                            <ul class="list-unstyled mb-2">
+                                <li><strong>Event:</strong> @item.Event.EventName</li>
+                                <!-- Using ToString() to format the date -->
+                                <li><strong>Opening Time:</strong> @item.Event.EventDate.ToString("dd/MM, yyyy HH:mm")</li>
 
-
-            <h2 class="h5">Alle Betalte Events</h2>
-            <div class="row">
-                @foreach (var item in Model.AllPaidEvents)
-                {
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 p-2">
-                        <div class="card shadow-sm h-100" style="font-family: monospace; font-size: 0.85rem;">
-                            <div class="card-body p-2">
-                                <h5 class="card-title text-center mb-2" style="font-size: 1rem;">Event Ticket</h5>
-                                <div class="text-center mb-2">
-                                    <img src="/Images/@item.Event.EventImageName" class="img-fluid" style="max-height: 80px;" alt="Event image">
-                                </div>
-                                <hr class="my-2">
-                                <ul class="list-unstyled mb-2">
-                                    <li><strong>Event:</strong> @item.Event.EventName</li>
-                                    <li><strong>Åbningstid:</strong> @item.Event.EventDate.ToString("dd/MM, yyyy HH:mm")</li>
-                                    <li><strong>Price:</strong> @item.Event.EventTicketPrice.ToString("F2") dkk</li>
-                                </ul>
-                                <hr class="my-2">
-                            </div>
+                                <!-- Using ToString() to format numbers instead of many decimals -->
+                                <li><strong>Price:</strong> @item.Event.EventTicketPrice.ToString("F2") dkk</li>
+                            </ul>
+                            <hr class="my-2">
                         </div>
                     </div>
-                }
-            </div>
+                </div>
+            }
+        </div>
 
-
-            
+        <h2 class="h5">All Paid Events</h2>
+        <div class="row">
+            @foreach (var item in Model.AllPaidEvents)
+            {
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2 p-2">
+                    <div class="card shadow-sm h-100" style="font-family: monospace; font-size: 0.85rem;">
+                        <div class="card-body p-2">
+                            <h5 class="card-title text-center mb-2" style="font-size: 1rem;">Event Ticket</h5>
+                            <div class="text-center mb-2">
+                                <img src="/Images/@item.Event.EventImageName" class="img-fluid" style="max-height: 80px;" alt="Event image">
+                            </div>
+                            <hr class="my-2">
+                            <ul class="list-unstyled mb-2">
+                                <li><strong>Event:</strong> @item.Event.EventName</li>
+                                <li><strong>Opening Time:</strong> @item.Event.EventDate.ToString("dd/MM, yyyy HH:mm")</li>
+                                <li><strong>Price:</strong> @item.Event.EventTicketPrice.ToString("F2") dkk</li>
+                            </ul>
+                            <hr class="my-2">
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
 
         <hr>
         <form method="post">
-            <h2>Nyhedsbrev</h2>
+            <h2>Newsletter</h2>
 
             @if (Model.CurrentUser.UserNewsletter)
             {
                 <p>
-                    <span style="color:green;">●</span> Du er tilmeldt nyhedsbrevet.
+                    <span style="color:green;">●</span> You are subscribed to the newsletter.
                 </p>
-                <button type="submit" class="btn btn-outline-danger" asp-page-handler="Afmelding">Afmeld</button>
+                <button type="submit" class="btn btn-outline-danger" asp-page-handler="Afmelding">Unsubscribe</button>
             }
             else
             {
                 <p>
-                    <span style="color:red;">●</span> Du er ikke tilmeldt nyhedsbrevet.
+                    <span style="color:red;">●</span> You are not subscribed to the newsletter.
                 </p>
-                <button type="submit" class="btn btn-outline-info" asp-page-handler="Tilmelding">Tilmeld</button>
+                <button type="submit" class="btn btn-outline-info" asp-page-handler="Tilmelding">Subscribe</button>
             }
         </form>
 
-
-
         <form method="post">
-            <h2>Log ud</h2>
-            <button type="submit" class="btn btn-outline-danger" asp-page-handler="Logout">Log ud</button>
+            <h2>Log Out</h2>
+            <button type="submit" class="btn btn-outline-danger" asp-page-handler="Logout">Log Out</button>
         </form>
-
-
-
     </div>
 }
-

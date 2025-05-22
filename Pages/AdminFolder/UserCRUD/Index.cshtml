@@ -5,56 +5,43 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
+<h1 style="text-align: center; color: #2c3e50;">Users</h1>
+
+<p style="text-align: right; margin-bottom: 20px;">
+    <a asp-page="Create" style="padding: 10px 15px; background-color: #3498db; color: white; text-decoration: none; border-radius: 5px;">Create New</a>
 </p>
-<table class="table">
+
+<table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.User[0].UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User[0].UserEmail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User[0].UserPassword)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User[0].UserIsAdmin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User[0].UserNewsletter)
-            </th>
-            <th></th>
+        <tr style="background-color: #f2f2f2;">
+            <th style="padding: 10px; border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.User[0].UserName)</th>
+            <th style="padding: 10px; border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.User[0].UserEmail)</th>
+            <th style="padding: 10px; border: 1px solid #ddd;"></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.User) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserPassword)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserIsAdmin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserNewsletter)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.UserId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.UserId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.UserId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.User)
+        {
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.UserName)</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.UserEmail)</td>
+                <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
+                    <a asp-page="./Edit" asp-route-id="@item.UserId"
+                       style="padding: 6px 12px; background-color: #3498db; color: white; text-decoration: none; border-radius: 5px; margin-right: 5px; display: inline-block;">
+                        Edit
+                    </a>
+                    <a asp-page="./Details" asp-route-id="@item.UserId"
+                       style="padding: 6px 12px; background-color: #7f8c8d; color: white; text-decoration: none; border-radius: 5px; margin-right: 5px; display: inline-block;">
+                        Details
+                    </a>
+                    <a asp-page="./Delete" asp-route-id="@item.UserId"
+                       style="padding: 6px 12px; background-color: #e74c3c; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">
+                        Delete
+                    </a>
+                </td>
+
+            </tr>
+        }
     </tbody>
 </table>
