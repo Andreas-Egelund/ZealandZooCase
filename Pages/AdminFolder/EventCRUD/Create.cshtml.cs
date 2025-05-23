@@ -16,11 +16,13 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
     {
         private readonly ZealandZooCase.Data.ZealandDBContext _context;
         private readonly ZealandService _service;
+        private readonly MailSenderService _mailsenderservice;
 
-        public CreateModel(ZealandZooCase.Data.ZealandDBContext context, ZealandService service)
+        public CreateModel(ZealandZooCase.Data.ZealandDBContext context, ZealandService service, MailSenderService mailsenderservice)
         {
             _context = context;
             _service = service;
+            _mailsenderservice = mailsenderservice;
         }
 
         public IActionResult OnGet()
@@ -92,7 +94,7 @@ namespace ZealandZooCase.Pages.AdminFolder.EventCrud
             await _context.SaveChangesAsync();
             foreach (var item in OurCustomer)
             {
-                _service.SendMail(item, OurEvent);
+                _mailsenderservice.SendMailTilmeldteUsers(item, OurEvent);
             }
 
             return RedirectToPage("./Index");

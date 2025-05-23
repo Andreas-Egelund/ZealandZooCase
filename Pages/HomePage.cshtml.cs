@@ -18,10 +18,13 @@ namespace ZealandZooCase.Pages
 
         public ZealandDBContext _context;
 
-        public HomePageModel(ZealandService service, ZealandDBContext context)
+        private MailSenderService _mailsenderservice;
+
+        public HomePageModel(ZealandService service, ZealandDBContext context, MailSenderService mailsenderservice)
         {
             _zealandService = service;
             _context = context;
+            _mailsenderservice = mailsenderservice;
         }
 
         public OpenHour? OpenHour => _context.OpenHours.FirstOrDefault();
@@ -92,7 +95,7 @@ namespace ZealandZooCase.Pages
                 });
                 _context.SaveChanges();
 
-                _zealandService.SendMailTilmeldteUsers(user, currentEvent);
+                _mailsenderservice.SendMail(user, currentEvent);
 
 
                 return RedirectToPage("/UserProfile/ProfileSite");
