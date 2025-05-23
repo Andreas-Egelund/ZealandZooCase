@@ -28,7 +28,7 @@ namespace ZealandZooCase.Pages.AdminFolder.AddressCRUD
                 return NotFound();
             }
 
-            var address = await _context.Addresses.FirstOrDefaultAsync(m => m.AddressId == id);
+            var address = await _context.Addresses.Include(a => a.AddressPostalcodeNavigation).FirstOrDefaultAsync(m => m.AddressId == id);
             if (address == null)
             {
                 return NotFound();

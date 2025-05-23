@@ -2,93 +2,84 @@
 @model ZealandZooCase.Pages.UserProfile.ProfileSiteModel
 @{
 }
+
 @if (Model.CurrentUser != null)
 {
-    <div id="profil-side">
-        <h1>@Model.CurrentUser.UserName</h1>
-        <p><strong>Email:</strong> @Model.CurrentUser.UserEmail</p>
-        <hr>
-
-        <h2>Registered Events</h2>
-        <div class="row">
-            @foreach (var item in Model.TilmeldteEvents)
-            {
-                <div class="col-6 col-sm-4 col-md-3 col-lg-2 p-2">
-                    <div class="card shadow-sm h-100" style="font-family: monospace; font-size: 0.85rem;">
-                        <div class="card-body p-2">
-                            <h5 class="card-title text-center mb-2" style="font-size: 1rem;">Event Ticket</h5>
-                            <div class="text-center mb-2">
-                                <img src="/Images/@item.Event.EventImageName" class="img-fluid" style="max-height: 80px;" alt="Event image">
-                            </div>
-                            <hr class="my-2">
-                            <ul class="list-unstyled mb-2">
-                                <li><strong>Event:</strong> @item.Event.EventName</li>
-                                <!-- Using ToString() to format the date -->
-                                <li><strong>Opening Time:</strong> @item.Event.EventDate.ToString("dd/MM, yyyy HH:mm")</li>
-
-                                <!-- Using ToString() to format numbers instead of many decimals -->
-                                <li><strong>Price:</strong> @item.Event.EventTicketPrice.ToString("F2") dkk</li>
-                            </ul>
-                            <hr class="my-2">
-                            @if (item.Event.EventTicketPrice <= 0)
-                            {
-                                <form method="post">
-                                    <button type="submit" class="btn btn-outline-danger" asp-page-handler="UnsubscribeFromEvent" name="eventId" value="@item.EventId">Unsubscribe</button>
-                                </form>
-                            }
-                        </div>
-                    </div>
-                </div>
-            }
+    <div class="container mt-4" id="profile-section">
+        <div class="card shadow-sm p-4 mb-4">
+            <h2 class="mb-3 text-center">My Profil</h2>
+            <h4 class="text-primary">Username: @Model.CurrentUser.UserName</h4>
+            <p><strong>Email:</strong> @Model.CurrentUser.UserEmail</p>
         </div>
 
-        <h2 class="h5">All Paid Events</h2>
-        <div class="row">
-            @foreach (var item in Model.AllPaidEvents)
-            {
-                <div class="col-6 col-sm-4 col-md-3 col-lg-2 p-2">
-                    <div class="card shadow-sm h-100" style="font-family: monospace; font-size: 0.85rem;">
-                        <div class="card-body p-2">
-                            <h5 class="card-title text-center mb-2" style="font-size: 1rem;">Event Ticket</h5>
-                            <div class="text-center mb-2">
-                                <img src="/Images/@item.Event.EventImageName" class="img-fluid" style="max-height: 80px;" alt="Event image">
+        <div class="card shadow-sm p-4 mb-4">
+            <h3 class="mb-3">Registered Events</h3>
+            <div class="row">
+                @foreach (var item in Model.TilmeldteEvents)
+                {
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div class="card h-100 border-light shadow-sm">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">🎫 @item.Event.EventName</h5>
+                                <img src="/Images/@item.Event.EventImageName" class="img-fluid mb-2" style="max-height: 100px;" alt="Event image" />
+                                <ul class="list-unstyled">
+                                    <li><strong>Date:</strong> @item.Event.EventDate.ToString("dd/MM, yyyy HH:mm")</li>
+                                    <li><strong>Price:</strong> @item.Event.EventTicketPrice.ToString("F2") DKK</li>
+                                </ul>
+                                @if (item.Event.EventTicketPrice <= 0)
+                                {
+                                    <form method="post">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm mt-2" asp-page-handler="UnsubscribeFromEvent" name="eventId" value="@item.EventId">Unsubscribe</button>
+                                    </form>
+                                }
                             </div>
-                            <hr class="my-2">
-                            <ul class="list-unstyled mb-2">
-                                <li><strong>Event:</strong> @item.Event.EventName</li>
-                                <li><strong>Opening Time:</strong> @item.Event.EventDate.ToString("dd/MM, yyyy HH:mm")</li>
-                                <li><strong>Price:</strong> @item.Event.EventTicketPrice.ToString("F2") dkk</li>
-                            </ul>
-                            <hr class="my-2">
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
 
-        <hr>
-        <form method="post">
-            <h2>Newsletter</h2>
+        <div class="card shadow-sm p-4 mb-4">
+            <h3 class="mb-3">Paid Tickets</h3>
+            <div class="row">
+                @foreach (var item in Model.AllPaidEvents)
+                {
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                        <div class="card h-100 border-light shadow-sm">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">🎟️ @item.Event.EventName</h5>
+                                <img src="/Images/@item.Event.EventImageName" class="img-fluid mb-2" style="max-height: 100px;" alt="Event image" />
+                                <ul class="list-unstyled">
+                                    <li><strong>Date:</strong> @item.Event.EventDate.ToString("dd/MM, yyyy HH:mm")</li>
+                                    <li><strong>Price:</strong> @item.Event.EventTicketPrice.ToString("F2") DKK</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
 
-            @if (Model.CurrentUser.UserNewsletter)
-            {
-                <p>
-                    <span style="color:green;">●</span> You are subscribed to the newsletter.
-                </p>
-                <button type="submit" class="btn btn-outline-danger" asp-page-handler="Afmelding">Unsubscribe</button>
-            }
-            else
-            {
-                <p>
-                    <span style="color:red;">●</span> You are not subscribed to the newsletter.
-                </p>
-                <button type="submit" class="btn btn-outline-info" asp-page-handler="Tilmelding">Subscribe</button>
-            }
-        </form>
+        <div class="card shadow-sm p-4 mb-4">
+            <h3 class="mb-3">Newsletter</h3>
+            <form method="post">
+                @if (Model.CurrentUser.UserNewsletter)
+                {
+                    <p><span style="color:green;">●</span> You are subscribed to the newsletter.</p>
+                    <button type="submit" class="btn btn-outline-danger" asp-page-handler="Afmelding">Unsubscribe</button>
+                }
+                else
+                {
+                    <p><span style="color:red;">●</span> You are not subscribed to the newsletter.</p>
+                    <button type="submit" class="btn btn-outline-primary" asp-page-handler="Tilmelding">Subscribe</button>
+                }
+            </form>
+        </div>
 
-        <form method="post">
-            <h2>Log Out</h2>
-            <button type="submit" class="btn btn-outline-danger" asp-page-handler="Logout">Log Out</button>
-        </form>
+        <div class="text-center">
+            <form method="post">
+                <button type="submit" class="btn btn-danger" asp-page-handler="Logout">Log Out</button>
+            </form>
+        </div>
     </div>
 }

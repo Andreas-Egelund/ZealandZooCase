@@ -108,6 +108,7 @@ namespace ZealandZooCase.Pages
 
         public IActionResult OnPostAfmeld(int EventId)
         {
+
             var user = _zealandService.SetCurrentUser();
             var signup = _context.AllEventSignups.FirstOrDefault(s => s.EventId == EventId && s.UserId == user.UserId);
             if (signup != null)

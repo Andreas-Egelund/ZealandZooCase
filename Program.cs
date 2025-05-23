@@ -9,11 +9,11 @@ builder.Services.AddRazorPages();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ZealandService>();
 
-
 builder.Services.AddDbContext<ZealandDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddSession(); // Add session
+
 
 
 var app = builder.Build();
