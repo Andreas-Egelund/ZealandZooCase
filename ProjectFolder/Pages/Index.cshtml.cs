@@ -12,7 +12,6 @@ namespace ZealandZooCase.Pages
         private readonly ZealandDBContext _dbContext;
         private readonly ZealandService _service;
 
-
         public IndexModel(ILogger<IndexModel> logger, ZealandDBContext context, ZealandService service)
         {
             _logger = logger;
@@ -22,11 +21,13 @@ namespace ZealandZooCase.Pages
         }
 
         public List<OurEvent> UpcomingEvents { get; set; }
-        public string Error { get; set; }
+
         public OpenHour? OpenHour { get; set; }
 
 
-      
+        public string Error { get; set; }
+
+
 
         public IActionResult OnPostVisKalander()
         {
@@ -57,7 +58,10 @@ namespace ZealandZooCase.Pages
             }
             catch (Exception ex)
             {
-                Error = ex.Message;
+                // Log the exception
+                _logger.LogError(ex, "An error occurred while retrieving the OpenHour record.");
+                // Handle the error (e.g., show an error message)
+                ModelState.AddModelError(string.Empty, "An error occurred while retrieving the OpenHour record.");
             }
 
             // Display the login or guest option page
@@ -70,7 +74,6 @@ namespace ZealandZooCase.Pages
 
         public IActionResult OnPostContinueAsGuest()
         {
-
             // Just skip login — do not set session
             return RedirectToPage("/HomePage");
         }

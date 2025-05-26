@@ -8773,19 +8773,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\andre\\.nuget\\packages\\": {}
+    "C:\\Users\\andre\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DATAMATIKER - ROSKILDE\\2. Semester\\EksamensProjekt\\UnitTests\\UnitTestZealandZoo\\UnitTestZealandZoo.csproj",
+      "projectUniqueName": "C:\\Users\\andre\\source\\repos\\ZealandZooCase\\UnitTests\\UnitTestZealandZoo\\UnitTestZealandZoo.csproj",
       "projectName": "UnitTestZealandZoo",
-      "projectPath": "D:\\DATAMATIKER - ROSKILDE\\2. Semester\\EksamensProjekt\\UnitTests\\UnitTestZealandZoo\\UnitTestZealandZoo.csproj",
+      "projectPath": "C:\\Users\\andre\\source\\repos\\ZealandZooCase\\UnitTests\\UnitTestZealandZoo\\UnitTestZealandZoo.csproj",
       "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-      "outputPath": "D:\\DATAMATIKER - ROSKILDE\\2. Semester\\EksamensProjekt\\UnitTests\\UnitTestZealandZoo\\obj\\",
+      "outputPath": "C:\\Users\\andre\\source\\repos\\ZealandZooCase\\UnitTests\\UnitTestZealandZoo\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
         "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8793,15 +8798,14 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\DATAMATIKER - ROSKILDE\\2. Semester\\EksamensProjekt\\ProjectFolder\\ZealandZooCase.csproj": {
-              "projectPath": "D:\\DATAMATIKER - ROSKILDE\\2. Semester\\EksamensProjekt\\ProjectFolder\\ZealandZooCase.csproj"
+            "C:\\Users\\andre\\source\\repos\\ZealandZooCase\\ProjectFolder\\ZealandZooCase.csproj": {
+              "projectPath": "C:\\Users\\andre\\source\\repos\\ZealandZooCase\\ProjectFolder\\ZealandZooCase.csproj"
             }
           }
         }
@@ -8815,7 +8819,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -8858,7 +8863,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

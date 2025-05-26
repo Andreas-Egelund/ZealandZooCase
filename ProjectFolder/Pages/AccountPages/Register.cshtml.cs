@@ -28,7 +28,6 @@ namespace ZealandZooCase.Pages.AccountPages
         public bool WantsNewsletter { get; set; } 
 
         public string ErrorMessage { get; set; }
-        public string Error { get; set; }
 
         public void OnGet() { }
 
@@ -36,14 +35,14 @@ namespace ZealandZooCase.Pages.AccountPages
         {
             try
             {
-                if (_context.Users.Any(u => u.UserName == Username))
+                if (_context.Users.Any(u => u.UserName.ToLower() == Username.ToLower()))
                 {
                     ErrorMessage = "Username already exists.";
                     return Page();
                 }
-                else if (_context.Users.Any(u => u.UserEmail == Email))
+                else if (_context.Users.Any(u => u.UserEmail.ToLower() == Email.ToLower()))
                 {
-                    ErrorMessage = "Email er tilknyttet anden konto";
+                    ErrorMessage = "Email is Already connected to another account";
                     return Page();
                 }
 
@@ -55,9 +54,9 @@ namespace ZealandZooCase.Pages.AccountPages
             }
             catch (Exception ex)
             {
-                Error = ex.Message;
+                ErrorMessage = ex.Message;
                
-
+                return Page();
             }
         }
     }

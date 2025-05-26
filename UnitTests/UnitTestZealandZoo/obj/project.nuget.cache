@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jVCUdv1sWkA=",
+  "dgSpecHash": "ZODu2BRxayc=",
   "success": true,
-  "projectFilePath": "D:\\DATAMATIKER - ROSKILDE\\2. Semester\\EksamensProjekt\\UnitTests\\UnitTestZealandZoo\\UnitTestZealandZoo.csproj",
+  "projectFilePath": "C:\\Users\\andre\\source\\repos\\ZealandZooCase\\UnitTests\\UnitTestZealandZoo\\UnitTestZealandZoo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\andre\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
