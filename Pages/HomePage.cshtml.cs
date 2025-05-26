@@ -31,9 +31,8 @@ namespace ZealandZooCase.Pages
         public User ?CurrentUser => _zealandService.SetCurrentUser();
 
         public bool IsLoggedIn { get; set; }
-
-
         public List<OpenHour> OpenHours { get; set; }
+        public string Error { get; set; }
 
         public List<OurEvent> AllEvents => _context.AllOurEvents.OrderBy(e => e.EventDate).ToList();
 
@@ -74,6 +73,8 @@ namespace ZealandZooCase.Pages
 
         public IActionResult OnPostTilmeld(int EventId)
         {
+            try
+            {
             var currentEvent = _context.AllOurEvents.FirstOrDefault(e => e.EventId == EventId);
             var NumberofUsersSignedUp = _context.AllEventSignups.Where(s => s.EventId == EventId).Count();
 
@@ -101,6 +102,11 @@ namespace ZealandZooCase.Pages
                 return RedirectToPage("/UserProfile/ProfileSite");
 
             }
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+            }
 
 
             return RedirectToPage("/UserProfile/ProfileSite");
@@ -111,33 +117,48 @@ namespace ZealandZooCase.Pages
 
         public IActionResult OnPostAfmeld(int EventId)
         {
-
-            var user = _zealandService.SetCurrentUser();
-            var signup = _context.AllEventSignups.FirstOrDefault(s => s.EventId == EventId && s.UserId == user.UserId);
-            if (signup != null)
+            try
             {
-                _context.AllEventSignups.Remove(signup);
-                _context.SaveChanges();
+                var user = _zealandService.SetCurrentUser();
+                var signup = _context.AllEventSignups.FirstOrDefault(s => s.EventId == EventId && s.UserId == user.UserId);
+                if (signup != null)
+                {
+                    _context.AllEventSignups.Remove(signup);
+                    _context.SaveChanges();
 
+                }
+                return RedirectToPage("/UserProfile/ProfileSite");
             }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+            }
+            return Page();
 
-
-            return RedirectToPage("/UserProfile/ProfileSite");
         }
 
 
         public IActionResult OnPostGoToCheckout(int EventId)
         {
+            try
+            {
 
-            var user = _zealandService.SetCurrentUser();
-            if (user != null)
-            {
-                return RedirectToPage("/Checkout/CheckOut", new { EventId = EventId}); //Sender eventId til checkout siden. Ren Magi  - Andreas E.
+                var user = _zealandService.SetCurrentUser();
+                if (user != null)
+                {
+                    return RedirectToPage("/Checkout/CheckOut", new { EventId = EventId }); //Sender eventId til checkout siden. Ren Magi  - Andreas E.
+                }
+                else
+                {
+                    return RedirectToPage("/Login");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return RedirectToPage("/Login");
+                Error = ex.Message;
+
             }
+            return Page();
         }
 
 

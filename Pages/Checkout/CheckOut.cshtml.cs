@@ -29,7 +29,7 @@ namespace ZealandZooCase.Pages.Checkout
         public OurEvent CurrentEventBeingBought { get; set; }
 
         public User CurrentUser { get; set; }
-
+        public string Error { get; set; }
 
 
         public void OnGet(int EventId)
@@ -45,7 +45,8 @@ namespace ZealandZooCase.Pages.Checkout
 
         public IActionResult OnPostCompletePurchase(int EventId)
         {
-
+            try
+            {
 
             CurrentEventBeingBought = _dbContext.AllOurEvents.FirstOrDefault(e => e.EventId == EventId);
 
@@ -64,7 +65,14 @@ namespace ZealandZooCase.Pages.Checkout
 
 
 
-            return RedirectToPage("/HomePage");
+            return RedirectToPage("/HomePage");            
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+            }
+
+            return Page();
 
 
 

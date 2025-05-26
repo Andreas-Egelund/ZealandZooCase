@@ -28,27 +28,37 @@ namespace ZealandZooCase.Pages.AccountPages
         public bool WantsNewsletter { get; set; } 
 
         public string ErrorMessage { get; set; }
+        public string Error { get; set; }
 
         public void OnGet() { }
 
         public IActionResult OnPost()
         {
-            if (_context.Users.Any(u => u.UserName == Username))
+            try
             {
-                ErrorMessage = "Username already exists.";
-                return Page();
+                if (_context.Users.Any(u => u.UserName == Username))
+                {
+                    ErrorMessage = "Username already exists.";
+                    return Page();
+                }
+                else if (_context.Users.Any(u => u.UserEmail == Email))
+                {
+                    ErrorMessage = "Email er tilknyttet anden konto";
+                    return Page();
+                }
+
+                var user = new User { UserName = Username, UserPassword = Password, UserEmail = Email };
+                _context.Users.Add(user);
+                _context.SaveChanges();
+
+                return RedirectToPage("/AccountPages/LoginPage");
             }
-            else if (_context.Users.Any(u => u.UserEmail == Email))
+            catch (Exception ex)
             {
-                ErrorMessage = "Email er tilknyttet anden konto";
-                return Page();
+                Error = ex.Message;
+               
+
             }
-
-            var user = new User { UserName = Username, UserPassword = Password , UserEmail = Email};
-            _context.Users.Add(user);
-            _context.SaveChanges();
-
-            return RedirectToPage("/AccountPages/LoginPage");
         }
     }
 }

@@ -45,26 +45,56 @@ namespace ZealandZooCase.Pages.UserProfile
 
         public IActionResult OnPostTilmelding()
         {
-            // Opdaterer nyhedsbrev property til true.
-            CurrentUser.UserNewsletter = true;
-            _context.SaveChanges();
-            return Page();
+            try
+            {
+                // Opdaterer nyhedsbrev property til true.
+                CurrentUser.UserNewsletter = true;
+                _context.SaveChanges();
+                return Page();
+            }
+            catch (Exception ex)
+            {
+                // Håndterer fejl
+                ModelState.AddModelError(string.Empty, "There was an error while subscribing to the newsletter: " + ex.Message);
+                return Page();
+            }
         }
 
         public IActionResult OnPostAfmelding()
         {
-            // Opdaterer nyhedsbrev property til false.
-            CurrentUser.UserNewsletter = false;
-            _context.SaveChanges();
+            try
+            {
+
+                // Opdaterer nyhedsbrev property til false.
+                CurrentUser.UserNewsletter = false;
+                _context.SaveChanges();
+                return Page();
+            }
+            catch(Exception ex)
+            {
+                // Håndterer fejl
+                ModelState.AddModelError(string.Empty, "There was an error while unsubscribing from the newsletter: " + ex.Message);
+
+            }
             return Page();
+
         }
 
 
         public IActionResult OnPostLogout()
         {
-            // Logger brugeren ud og sletter sessionen
-            HttpContext.Session.Clear();
-            return RedirectToPage("/Index");
+            try
+            {
+                // Logger brugeren ud og sletter sessionen
+                HttpContext.Session.Clear();
+                return RedirectToPage("/Index");
+            }
+            catch (Exception ex) 
+            {
+                // Håndterer fejl
+                ModelState.AddModelError(string.Empty, "There was an error while logging out profile: " + ex.Message);
+            }
+            return Page();
         }
 
 
@@ -72,6 +102,8 @@ namespace ZealandZooCase.Pages.UserProfile
 
         public IActionResult OnPostUnsubscribeFromEvent(int eventId)
         {
+            try
+            { 
             // Henter den tilmeldte event fra databasen
             var signup = _context.AllEventSignups.FirstOrDefault(e => e.UserId == CurrentUser.UserId && e.EventId == eventId);
             if (signup != null)
@@ -81,7 +113,14 @@ namespace ZealandZooCase.Pages.UserProfile
                 _context.SaveChanges();
             }
             return Page();
-
+            }
+            catch (Exception ex)
+            {
+                // Håndterer fejl
+                ModelState.AddModelError(string.Empty, "There was an error while unsubscribing from event  : " + ex.Message);
+            }
+            
+            return Page();
         }
 
 

@@ -24,11 +24,14 @@ namespace ZealandZooCase.Pages
         public List<int> RegisterEvent { get; set; }
         public List<OurEvent> UpcomingEvents { get; set; } = new();
         public DateTime CurrentMonth { get; set; }
+        public string Error { get; set; }
 
 
 
         public void OnGet(string? month)
         {
+            try
+            {
             // Parse month parameter or use current month
             if (!string.IsNullOrEmpty(month) && DateTime.TryParseExact(month, "yyyy-MM", null, System.Globalization.DateTimeStyles.None, out var parsedMonth))
             {
@@ -62,6 +65,12 @@ namespace ZealandZooCase.Pages
             if (IsLoggedIn)
             {
                 RegisterEvent = _context.AllEventSignups.Where(s => s.UserId == CurrentUser.UserId).Select(s => s.EventId).ToList();
+            }
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+
             }
         }
 

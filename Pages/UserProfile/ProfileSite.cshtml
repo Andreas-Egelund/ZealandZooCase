@@ -62,18 +62,23 @@
 
         <div class="card shadow-sm p-4 mb-4">
             <h3 class="mb-3">Newsletter</h3>
-            <form method="post">
                 @if (Model.CurrentUser.UserNewsletter)
                 {
+                    <form method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
                     <p><span style="color:green;">●</span> You are subscribed to the newsletter.</p>
                     <button type="submit" class="btn btn-outline-danger" asp-page-handler="Afmelding">Unsubscribe</button>
+                    </form>
                 }
                 else
                 {
+                    <form method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
                     <p><span style="color:red;">●</span> You are not subscribed to the newsletter.</p>
                     <button type="submit" class="btn btn-outline-primary" asp-page-handler="Tilmelding">Subscribe</button>
+                    </form>
+
                 }
-            </form>
         </div>
 
         <div class="text-center">

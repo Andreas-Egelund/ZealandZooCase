@@ -22,7 +22,7 @@ namespace ZealandZooCase.Pages
         }
 
         public List<OurEvent> UpcomingEvents { get; set; }
-
+        public string Error { get; set; }
         public OpenHour? OpenHour { get; set; }
 
 
@@ -57,10 +57,7 @@ namespace ZealandZooCase.Pages
             }
             catch (Exception ex)
             {
-                // Log the exception
-                _logger.LogError(ex, "An error occurred while retrieving the OpenHour record.");
-                // Handle the error (e.g., show an error message)
-                ModelState.AddModelError(string.Empty, "An error occurred while retrieving the OpenHour record.");
+                Error = ex.Message;
             }
 
             // Display the login or guest option page
@@ -73,6 +70,7 @@ namespace ZealandZooCase.Pages
 
         public IActionResult OnPostContinueAsGuest()
         {
+
             // Just skip login — do not set session
             return RedirectToPage("/HomePage");
         }
