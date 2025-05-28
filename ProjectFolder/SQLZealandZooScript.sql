@@ -102,41 +102,15 @@ ALTER TABLE allEventSignups ADD CONSTRAINT FK_allEventSignups_Users
 ALTER TABLE allEventSignups ADD signup_date DATETIME NOT NULL DEFAULT GETDATE();
 
 
--- Insert ZipCodes
-INSERT INTO ZipCodes (postalcode, city, state, country) VALUES
-('1000', 'Copenhagen', 'Hovedstaden', 'Denmark'),
-('2000', 'Frederiksberg', 'Hovedstaden', 'Denmark'),
-('3000', 'Helsingør', 'Hovedstaden', 'Denmark');
 
--- Insert Addresses
-INSERT INTO Addresses (street, address_postalcode) VALUES
-('Main Street 1', '1000'),
-('Central Avenue 5', '2000'),
-('Harbor Road 12', '3000');
 
--- Insert Events
-INSERT INTO AllOurEvents(event_name, event_description, address_id, event_date, event_maxAttendance, event_ticketPrice, event_imageName) VALUES
-('Food Festival', 'Enjoy local cuisine and drinks.', 1, '2025-07-10 12:00:00', 500, 150.00, 'foodfest.jpg'),
-('Tech Conference', 'Future of AI and robotics.', 2, '2025-09-15 09:00:00', 1000, 799.99, 'tech2025.png'),
-('Music Gala', 'An evening of classical and jazz.', 3, '2025-11-20 19:30:00', 300, 350.00, 'musicgala.jpeg');
+CREATE TABLE [dbo].[products] (
+    [product_id]   INT            IDENTITY (1, 1) NOT NULL,
+    [product_name] NVARCHAR (255) NOT NULL,
+    [quantity]     INT            NOT NULL,
+    [price]        INT            NOT NULL,
+    PRIMARY KEY CLUSTERED ([product_id] ASC)
+);
 
--- Insert Users
-INSERT INTO Users (user_name, user_email, user_password, user_isAdmin, user_newsletter) VALUES
-('Alice Jensen', 'alice@example.com', 'Passw0rd!', 0, 1),
-('Bob Sørensen', 'bob@example.com', 'Secure123!', 1, 1),
-('Charlie Hansen', 'charlie@example.com', 'qwerty789', 0, 0);
-
--- Insert OpenHours
-INSERT INTO OpenHours (openHours_date, openHours_start, openHours_end) VALUES
-('2025-07-10', 10, 22),
-('2025-09-15', 08, 18),
-('2025-11-20', 17, 23);
-
--- Insert AllEventSignups
-INSERT INTO allEventSignups (event_id, user_id, signup_date) VALUES
-(1, 1, '2025-06-01'),
-(1, 2, '2025-06-02'),
-(2, 2, '2025-08-01'),
-(3, 3, '2025-10-15');
 
 
