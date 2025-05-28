@@ -47,6 +47,8 @@ namespace ZealandZooCase.Pages.UserProfile
         {
             try
             {
+                
+
                 // Opdaterer nyhedsbrev property til true.
                 CurrentUser.UserNewsletter = true;
                 _context.SaveChanges();

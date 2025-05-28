@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UnitTestZealandZoo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+80fec70c29d78d55e48998b3901b2f1c78cc4e30")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+19fbbc0a60f2a8014e726ef23ff19c82a0adfb59")]
 [assembly: System.Reflection.AssemblyProductAttribute("UnitTestZealandZoo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UnitTestZealandZoo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
